@@ -1,0 +1,40 @@
+h1{
+    margin:0 auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-left: 3px red solid;
+    background-color: lightgray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    width: 600px;
+    font-size: 20px;
+}
+
+form{
+    margin: 0 auto;
+    background-color: whitesmoke;
+    border: 3px lightgray solid;
+    border-radius: 10px;
+    width: 600px;
+}
+
+form div{
+    padding: 15px;
+}
+
+.text,   .textarea,   .dropdown{
+    border: 1px lightgray solid;
+    padding: 5px;
+    color: black;
+    background-color: white;
+}
+
+.submit{
+    border: 1px lightgray solid;
+    padding: 5px;
+    color: white;
+    background-color: darkgray;
+    border-radius: 5px;
+    border-bottom: 2px gray solid;
+}
