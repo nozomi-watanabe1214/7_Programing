@@ -8,18 +8,46 @@
     
     <body>
     <h1>アカウント登録画面</h1>
-    <form method = "post" action = "mail_confirm.php">
+    <form method = "post" action = "regist_confirm.php">
         <div>
             <label>名前(性)</label>
-            <input type = "text" class = "text" size = "35" name ="name">
+            <input type = "text" class = "text" size = "35" name ="familyname">
         </div> 
         
         <div>
-            <label>メールアドレス</label>
-            <br>
-            <input type = "text" class ="text" size = "35" name = "mail">
+            <label>名前(名)</label>
+            <input type = "text" class ="text" size = "35" name = "lastname">
         </div>
         
+        <div>
+            <label>カナ(性)</label>
+            <input type = "text" class = "text"
+                   size = "35" name = "familyname_kana">
+        </div>
+        
+        <div>
+            <label>カナ(名)</label>
+            <input type = "text" class = "text"
+                   size = "35" name = "lastname_kana">
+        </div>
+        
+        <div>
+            <label>メールアドレス</label>
+            <input type = "text" class = "text"
+                   size = "35" name = "mail">   
+        </div>
+        
+        <div>
+            <label>パスワード</label>
+            <input type = "text" class = "text"
+                   size = "35" name = "password">
+        </div>
+        
+        <div>
+            <label>性別</label>
+            <input type="radio" name = "gender" value = "XXX">男
+            <input type = "radio" name = "gender" value = "XXX">女
+        </div>
         <div>
             <label>年齢</label>
             <br>
