@@ -13,48 +13,48 @@
     <form method = "post" action = "regist_confirm.php">
         <div>
             <label>名前(性)</label>
-            <input type = "text" class = "text" size = "35" name ="familyname">
+            <input type = "text" class = "text" size = "35"  name ="familyname" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
         </div> 
         
         <div>
             <label>名前(名)</label>
-            <input type = "text" class ="text" size = "35" name = "lastname">
+            <input type = "text" class ="text" size = "35" name = "lastname" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
         </div>
         
         <div>
             <label>カナ(性)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "familyname_kana">
+                   size = "35" name = "familyname_kana" maxlength = "10" pattern = "[\uFF66-\uFF9D\uFF0D]+$">
         </div>
         
         <div>
             <label>カナ(名)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "lastname_kana">
+                   size = "35" name = "lastname_kana" maxlength = "10" pattern = "[\uFF66-\uFF9D\uFF0D]+$">
         </div>
         
         <div>
             <label>メールアドレス</label>
             <input type = "text" class = "text"
-                   size = "35" name = "mail">   
+                   size = "35" name = "mail" maxlength = "100" pattern = "^[a-zA-Z0-9-@]+$">   
         </div>
         
         <div>
             <label>パスワード</label>
             <input type = "text" class = "text"
-                   size = "35" name = "password">
+                   size = "35" name = "password" maxlength = "10" pattern = "[a-zA-Z0-9]+$">
         </div>
         
         <div>
             <label>性別</label>
-            <input type="radio" name = "gender" value = "XXX">男
+            <input type = "radio" name = "gender" value = "XXX">男
             <input type = "radio" name = "gender" value = "XXX">女
         </div>
         
         <div>
             <label>郵便番号</label>
             <input type = "text" class = "text"
-                   size = "35" name = "postal_code">
+                   size = "35" name = "postal_code" maxlength = "7" pattern="^[0-9]+$">
         </div>
         
         <div>
@@ -114,13 +114,13 @@
         <div>
             <label>住所（市区町村）</label>
             <input type = "text" class = "text"
-                   size = "35" name = "address_1">
+                   size = "35" name = "address_1" maxlength = "10" pattern="[-\u4E00-\u9FFF\u3040-\u309Fー\uFF66-\uFF9F\u30A1-\u30F60-9０-９_\s]*">
         </div>
         
         <div>
             <label>住所（番地）</label>
             <input type = "text" class = "text"
-                   size = "35" name = "address_2">
+                   size = "35" name = "address_2" maxlength = "100" pattern = "[-\u4E00-\u9FFF\u3040-\u309Fー\uFF66-\uFF9F\u30A1-\u30F60-9０-９_\s]*">
         </div>
         
         <div>
