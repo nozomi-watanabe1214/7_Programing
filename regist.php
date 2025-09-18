@@ -24,13 +24,13 @@
         <div>
             <label>カナ(性)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "familyname_kana" maxlength = "10" pattern = "[\uFF66-\uFF9D\uFF0D]+$">
+                   size = "35" name = "familyname_kana" maxlength = "10" >
         </div>
         
         <div>
             <label>カナ(名)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "lastname_kana" maxlength = "10" pattern = "[\uFF66-\uFF9D\uFF0D]+$">
+                   size = "35" name = "lastname_kana" maxlength = "10" >
         </div>
         
         <div>
@@ -41,7 +41,7 @@
         
         <div>
             <label>パスワード</label>
-            <input type = "text" class = "text"
+            <input type = "password" class = "text"
                    size = "35" name = "password" maxlength = "10" pattern = "[a-zA-Z0-9]+$">
         </div>
         
