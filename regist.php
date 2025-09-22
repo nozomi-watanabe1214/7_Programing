@@ -11,26 +11,28 @@
         
     <h1>アカウント登録画面</h1>
     <form method = "post" action = "regist_confirm.php">
+        
+        
         <div>
             <label>名前(性)</label>
-            <input type = "text" class = "text" size = "35"  name ="familyname" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
+            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
         </div> 
         
         <div>
             <label>名前(名)</label>
-            <input type = "text" class ="text" size = "35" name = "lastname" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
+            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
         </div>
         
         <div>
             <label>カナ(性)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "familyname_kana" maxlength = "10" >
+                   size = "35" name = "family_name_kana" maxlength = "10" >
         </div>
         
         <div>
             <label>カナ(名)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "lastname_kana" maxlength = "10" >
+                   size = "35" name = "last_name_kana" maxlength = "10" >
         </div>
         
         <div>
@@ -47,8 +49,8 @@
         
         <div>
             <label>性別</label>
-            <input type = "radio" name = "gender" value = "XXX">男
-            <input type = "radio" name = "gender" value = "XXX">女
+            <input type = "radio" name = "gender" value = "男">男
+            <input type = "radio" name = "gender" value = "女">女
         </div>
         
         <div>
