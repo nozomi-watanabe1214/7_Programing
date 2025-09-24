@@ -11,8 +11,7 @@
         
     <h1>アカウント登録画面</h1>
     <form method = "post" action = "regist_confirm.php">
-        
-        
+             
         <div>
             <label>名前(性)</label>
             <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
@@ -128,8 +127,8 @@
         <div>
             <label>アカウント権限</label>
             <select name = "authority">
-                <option value = "1">一般</option>
-                <option value = "2">管理者</option>
+                <option value = "一般">一般</option>
+                <option value = "管理者">管理者</option>
             </select>
         </div> 
         
