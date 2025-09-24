@@ -33,19 +33,27 @@ form div{
 .button1{
     border: 1px lightgray solid;
     padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: white;
     background-color: darkgray;
     border-radius: 5px;
     border-bottom: 2px gray solid;
+    margin-left: 100px;
 }
 
 .button2{
     border: 1px lightgray solid;
+    padding-left: 15px;
     padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: white;
     background-color: darkorange;
     border-radius: 5px;
     border-bottom: 2px gray solid;
+    margin-left: 200px;
 }
 
 footer{
