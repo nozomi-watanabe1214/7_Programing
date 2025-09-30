@@ -14,54 +14,54 @@
              
         <div>
             <label>名前(性)</label>
-            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
+            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$" required>
         </div> 
         
         <div>
             <label>名前(名)</label>
-            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$">
+            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$" required>
         </div>
         
         <div>
             <label>カナ(性)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "family_name_kana" maxlength = "10" >
+                   size = "35" name = "family_name_kana" maxlength = "10" required>
         </div>
         
         <div>
             <label>カナ(名)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "last_name_kana" maxlength = "10" >
+                   size = "35" name = "last_name_kana" maxlength = "10" required>
         </div>
         
         <div>
             <label>メールアドレス</label>
             <input type = "text" class = "text"
-                   size = "35" name = "mail" maxlength = "100" pattern = "^[a-zA-Z0-9-@]+$">   
+                   size = "35" name = "mail" maxlength = "100" pattern = "^[a-zA-Z0-9-@]+$" required>   
         </div>
         
         <div>
             <label>パスワード</label>
             <input type = "password" class = "text"
-                   size = "35" name = "password" maxlength = "10" pattern = "[a-zA-Z0-9]+$">
+                   size = "35" name = "password" maxlength = "10" pattern = "[a-zA-Z0-9]+$" required>
         </div>
         
         <div>
             <label>性別</label>
             <input type = "radio" name = "gender" value = "男">男
-            <input type = "radio" name = "gender" value = "女">女
+            <input type = "radio" name = "gender" value = "女" required>女
         </div>
         
         <div>
             <label>郵便番号</label>
             <input type = "text" class = "text"
-                   size = "35" name = "postal_code" maxlength = "7" pattern="^[0-9]+$">
+                   size = "35" name = "postal_code" maxlength = "7" pattern="^[0-9]+$" required>
         </div>
         
         <div>
             <label>住所（都道府県）</label>
-            <select name="prefecture">
-                <option value="" selected></option>
+            <select name="prefecture" required>
+                <option value="" disabled selected></option>
                 <option value="北海道">北海道</option>
                 <option value="青森県">青森県</option>
                 <option value="岩手県">岩手県</option>
@@ -115,18 +115,18 @@
         <div>
             <label>住所（市区町村）</label>
             <input type = "text" class = "text"
-                   size = "35" name = "address_1" maxlength = "10" pattern="[-\u4E00-\u9FFF\u3040-\u309Fー\uFF66-\uFF9F\u30A1-\u30F60-9０-９_\s]*">
+                   size = "35" name = "address_1" maxlength = "10" pattern="[-\u4E00-\u9FFF\u3040-\u309Fー\uFF66-\uFF9F\u30A1-\u30F60-9０-９_\s]*" required>
         </div>
         
         <div>
             <label>住所（番地）</label>
             <input type = "text" class = "text"
-                   size = "35" name = "address_2" maxlength = "100" pattern = "[-\u4E00-\u9FFF\u3040-\u309Fー\uFF66-\uFF9F\u30A1-\u30F60-9０-９_\s]*">
+                   size = "35" name = "address_2" maxlength = "100" pattern = "[-\u4E00-\u9FFF\u3040-\u309Fー\uFF66-\uFF9F\u30A1-\u30F60-9０-９_\s]*" required>
         </div>
         
         <div>
             <label>アカウント権限</label>
-            <select name = "authority">
+            <select name = "authority" required>
                 <option value = "一般">一般</option>
                 <option value = "管理者">管理者</option>
             </select>
