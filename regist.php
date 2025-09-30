@@ -1,3 +1,14 @@
+<?php
+$family_name_error = "";
+$last_name_error = "";
+    if(empty($_POST["family_name"])){
+        $family_name_error = "名前(性)が未入力です";
+    }
+    if(empty($_POST["last_name"])){
+        $last_name_error = "名前(名)が未入力です";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -133,7 +144,17 @@
         </div> 
         
         <div>
-            <input type = "submit" class = "submit" value = "確認">
+            <input type = "submit" class = "submit" value = "確認する">
+            <?php
+$family_name_error = "";
+$last_name_error = "";
+    if(empty($_POST["family_name"])){
+        $family_name_error = "名前(性)が未入力です";
+    }
+    if(empty($_POST["last_name"])){
+        $last_name_error = "名前(名)が未入力です";
+    }
+?>
         </div>
         
     </form>
