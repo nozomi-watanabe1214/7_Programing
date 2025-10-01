@@ -146,13 +146,14 @@ $last_name_error = "";
         <div>
             <input type = "submit" class = "submit" value = "確認する">
             <?php
-$family_name_error = "";
-$last_name_error = "";
-    if(empty($_POST["family_name"])){
-        $family_name_error = "名前(性)が未入力です";
+$family_name_error = "?";
+$last_name_error = "?";
+            
+    if($family_name_error = null){
+        echo "名前(性)が未入力です";
     }
-    if(empty($_POST["last_name"])){
-        $last_name_error = "名前(名)が未入力です";
+    if($last_name_error = null){
+        echo "名前(名)が未入力です";
     }
 ?>
         </div>
