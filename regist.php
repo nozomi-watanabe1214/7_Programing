@@ -25,24 +25,24 @@ $last_name_error = "";
              
         <div>
             <label>名前(性)</label>
-            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$" required>
+            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u3040-\u309f\u4E00-\u9FFF]" required>
         </div> 
         
         <div>
             <label>名前(名)</label>
-            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー]*+$" required>
+            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "[\u3040-\u309f\u4E00-\u9FFF]" required>
         </div>
         
         <div>
             <label>カナ(性)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "family_name_kana" maxlength = "10" required>
+                   size = "35" name = "family_name_kana" maxlength = "10" pattern = "[\u30a0-\u30ff]" required>
         </div>
         
         <div>
             <label>カナ(名)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "last_name_kana" maxlength = "10" required>
+                   size = "35" name = "last_name_kana" maxlength = "10" pattern = "[\u30a0-\u30ff]"　required>
         </div>
         
         <div>
@@ -145,20 +145,12 @@ $last_name_error = "";
         
         <div>
             <input type = "submit" class = "submit" value = "確認する">
-            <?php
-$family_name_error = "?";
-$last_name_error = "?";
-            
-    if($family_name_error = null){
-        echo "名前(性)が未入力です";
-    }
-    if($last_name_error = null){
-        echo "名前(名)が未入力です";
-    }
-?>
+
         </div>
+    
+            </form>
         
-    </form>
+}
         
         <footer></footer>
     
