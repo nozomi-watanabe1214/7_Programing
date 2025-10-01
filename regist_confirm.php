@@ -75,8 +75,7 @@
             <?php echo $_POST['authority']; ?>
         </div>
         
-        
-        <input type = "submit" class = "button1" value = "前に戻る"　formaction = "regist.php">
+        <input type = "submit" class = "button1" onclick = "history.back()" value = "前に戻る"　formaction = "regist.php">
         
         <input type = "submit" class = "button2" value = "登録する" formaction = "regist_complete.php">
         <input type = "hidden" value = "<?php 
