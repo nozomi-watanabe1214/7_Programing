@@ -22,11 +22,12 @@ values('".$_POST['family_name']."','".$_POST['last_name']."','".$_POST['family_n
         <h1>アカウント登録完了画面</h1>
         
         <div class = "complete">
-            <p>登録完了しました</p>
+            <h2>登録完了しました</h2>
         </div>
         
         <div>
-            <input type = "submit" class = "submit" value = "TOPページへ戻る">
+            <form action="regist.php">
+            <input type = "submit" class = "submit" value = "TOPページへ戻る"></form> 
         </div>
         
         <footer></footer>
