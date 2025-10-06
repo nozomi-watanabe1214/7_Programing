@@ -26,6 +26,7 @@ $last_name_error = "";
         <div>
             <label>名前(性)</label>
             <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u3040-\u309f-\u4E00-\u9FFF-]*" required>
+            //正規表現について調べてみる。（詳しい表記方法など）
         </div> 
         
         <div>
@@ -54,14 +55,15 @@ $last_name_error = "";
         <div>
             <label>パスワード</label>
             <input type = "password" class = "text"
-                   size = "35" name = "password" maxlength = "10" pattern = "[a-zA-Z0-9]*" required>
+                   size = "35" name = "password" maxlength = "10" pattern = "^[a-zA-Z0-9]+$" required>
         </div>
         
         <div>
             <label>性別</label>
-            <input type = "radio" name = "gender" value = "男">男
-            <input type = "radio" name = "gender" value = "女" required>女
+            <input type = "radio" name = "gender" value = "0">男
+            <input type = "radio" name = "gender" value = "1" required>女
         </div>
+        //データと表記が＝なのでここにてパラメータ？次画面でもなってしまうのでどこでするのか。
         
         <div>
             <label>郵便番号</label>
@@ -138,8 +140,8 @@ $last_name_error = "";
         <div>
             <label>アカウント権限</label>
             <select name = "authority" required>
-                <option value = "一般">一般</option>
-                <option value = "管理者">管理者</option>
+                <option value = "0">一般</option>
+                <option value = "1">管理者</option>
             </select>
         </div> 
         
