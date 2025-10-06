@@ -42,12 +42,18 @@
         
         <div>
            <label>パスワード</label>
-           <?php echo $_POST['password']; ?>
+           <?php echo $_POST['password']; ?>//左はパスワード受け渡されてるだけなのでもらったものを●表示するコードを書く
         </div>
         
         <div>
             <label>性別</label>
-            <?php echo $_POST['gender']; ?>
+            <?php 
+            if($_POST['gender'] == 0){
+                echo "男";
+            } else if($_POST['gender'] == 1){
+                echo "女";
+            }
+            ?>
         </div>
         
         <div>
@@ -72,7 +78,13 @@
         
         <div>
             <label>アカウント権限</label>
-            <?php echo $_POST['authority']; ?>
+            <?php
+            if($_POST['authority'] == 0){
+                echo "一般";
+            } else if($_POST['authority'] == 1){
+                echo "管理者";
+            }
+            ?>
         </div>
         
         <input type = "submit" class = "button1" onclick = "history.back()" value = "前に戻る"　formaction = "regist.php">
