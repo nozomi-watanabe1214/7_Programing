@@ -42,7 +42,13 @@
         
         <div>
            <label>パスワード</label>
-           <?php echo $_POST['password']; ?>//左はパスワード受け渡されてるだけなのでもらったものを●表示するコードを書く
+           <?php 
+            $password = '$_POST['password']';
+            for($password = 1; $password <= mb_strlen($password); $password++){
+                echo "●"
+            }
+            ?>
+            //左はパスワード受け渡されてるだけなのでもらったものを●表示するコードを書く
         </div>
         
         <div>
@@ -101,7 +107,7 @@
         <input type = "hidden" value = "<?php 
                                         echo $_POST['mail']; ?>" name = "mail">
         <input type = "hidden" value = "<?php 
-                                        echo $_POST['password']; ?>" name = "password">
+                                        echo $_POST['password_hash'] ; ?>" name = "password_hash">
         <input type = "hidden" value = "<?php 
                                         echo $_POST['gender']; ?>" name = "gender">
         <input type = "hidden" value = "<?php 
