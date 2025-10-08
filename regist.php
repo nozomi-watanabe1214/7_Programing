@@ -37,25 +37,25 @@ $last_name_error = "";
         <div>
             <label>カナ(性)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "family_name_kana" maxlength = "10" pattern = "[\u30a0-\u30ff-]*" required>
+                   size = "35" name = "family_name_kana" maxlength = "10" pattern = "^[ァ-ンヴー]*$" required>
         </div>
         
         <div>
             <label>カナ(名)</label>
             <input type = "text" class = "text"
-                   size = "35" name = "last_name_kana" maxlength = "10" pattern = "[\u30a0-\u30ff-]*"　required>
+                   size = "35" name = "last_name_kana" maxlength = "10" pattern = "^[ァ-ンヴー]*$"　required>
         </div>
         
         <div>
             <label>メールアドレス</label>
             <input type = "text" class = "text"
-                   size = "35" name = "mail" maxlength = "100" pattern = "[a-zA-Z0-9.-@]*" required>   
+                   size = "35" name = "mail" maxlength = "100" pattern = "^[0-9a-zA-Z\-\@\.]*$" required>   
         </div>
         
         <div>
             <label>パスワード</label>
             <input type = "password" class = "text"
-                   size = "35" name = "password" maxlength = "10" pattern = "^[a-zA-Z0-9]+$" required>
+                   size = "35" name = "password" maxlength = "10" pattern = "^[a-zA-Z0-9]*$" required>
         </div>
         
         <div>
@@ -68,7 +68,7 @@ $last_name_error = "";
         <div>
             <label>郵便番号</label>
             <input type = "text" class = "text"
-                   size = "35" name = "postal_code" maxlength = "7" pattern="^[0-9]+$" required>
+                   size = "35" name = "postal_code" pattern="^[0-9]{7}$" required>
         </div>
         
         <div>
