@@ -25,13 +25,13 @@ $last_name_error = "";
              
         <div>
             <label>名前(性)</label>
-            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "[\u3040-\u309f-\u4E00-\u9FFF-]*" required>
+            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "^[ぁ-ん亜-熙ー]*$" required>
             //正規表現について調べてみる。（詳しい表記方法など）
         </div> 
         
         <div>
             <label>名前(名)</label>
-            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "[\u3040-\u309f-\u4E00-\u9FFF-]*" required>
+            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "^[ぁ-ん亜-熙ー]*$" required>
         </div>
         
         <div>
@@ -63,7 +63,6 @@ $last_name_error = "";
             <input type = "radio" name = "gender" value = "0">男
             <input type = "radio" name = "gender" value = "1" required>女
         </div>
-        //データと表記が＝なのでここにてパラメータ？次画面でもなってしまうのでどこでするのか。
         
         <div>
             <label>郵便番号</label>
