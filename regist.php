@@ -25,13 +25,13 @@ $last_name_error = "";
              
         <div>
             <label>名前(性)</label>
-            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "^[ぁ-ん亜-熙ー]*$" required>
+            <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "^[ぁ-ん一-龠ー]*$" required>
             //正規表現について調べてみる。（詳しい表記方法など）
         </div> 
         
         <div>
             <label>名前(名)</label>
-            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "^[ぁ-ん亜-熙ー]*$" required>
+            <input type = "text" class ="text" size = "35" name = "last_name" maxlength = "10" pattern = "^[ぁ-ん一-龠ー]*$" required>
         </div>
         
         <div>
