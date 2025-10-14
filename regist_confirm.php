@@ -13,7 +13,7 @@
     
     <h1>アカウント登録確認画面</h1>
     
-    <form method = "post" action = "?">
+    <div class = "confirm">
         
         <div>
             <label>名前(性)</label>
@@ -92,10 +92,13 @@
             }
             ?>
         </div>
-        
-        <input type = "submit" class = "button1" onclick = "history.back()" value = "前に戻る"　formaction = "regist.php">
-        
-        <input type = "submit" class = "button2" value = "登録する" formaction = "regist_complete.php">
+    
+    <form action = "javascript:history.back(regist.php);">
+        <input type = "submit" class = "button1" value = "前に戻る">
+    </form>
+    
+    <form action = "regist_complete.php">
+        <input type = "submit" class = "button2" value = "登録する">
         <input type = "hidden" value = "<?php 
                                         echo $_POST['family_name']; ?>" name = "family_name">
         <input type = "hidden" value = "<?php 
@@ -122,6 +125,7 @@
                                         echo $_POST['authority']; ?>" name = "authority">
         
     </form>
+    </div>
     
     <footer></footer>
 
