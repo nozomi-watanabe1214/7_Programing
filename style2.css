@@ -27,14 +27,15 @@ form{
 
 form div{
     padding: 15px;
+    margin: 0 auto;
 }
 
-.text,   .textarea,   .dropdown{
+.textarea{
     border: 1px lightgray solid;
     padding: 5px;
     color: black;
     background-color: white;
-    margin: auto;
+    text-align: center;
 }
 
 .submit{
