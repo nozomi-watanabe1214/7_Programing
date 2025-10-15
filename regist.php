@@ -127,13 +127,13 @@ $last_name_error = "";
         <div>
             <label>住所（市区町村）</label>
             <input type = "text" class = "text"
-                   size = "35" name = "address_1" maxlength = "10" pattern = "^[ぁ-んァ-ンヴ一-龠ー0-9\-\s　]*$" required>
+                   size = "35" name = "address_1" maxlength = "10" pattern = "^[ぁ-んァ-ンヴ一-龠ー0-9\-\ー\s　]*$" required>
         </div>
         
         <div>
             <label>住所（番地）</label>
             <input type = "text" class = "text"
-                   size = "35" name = "address_2" maxlength = "100" pattern = "^[ぁ-んァ-ンヴ一-龠ー0-9０-９\-|ー\s　]*$" required>
+                   size = "35" name = "address_2" maxlength = "100" pattern = "^[ぁ-んァ-ンヴ一-龠ー0-9\-\ー\s　]*$" required>
         </div>
         
         <div>
