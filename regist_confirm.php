@@ -48,7 +48,7 @@
             for ($i=1; $i<=$pass; $i++){
                 echo "●";
             } ?>
-            //左はパスワード受け渡されてるだけなのでもらったものを●表示するコードを書く
+        
         </div>
         
         <div>
@@ -106,8 +106,12 @@
                                         echo $_POST['last_name_kana']; ?>" name = "last_name_kana">
         <input type = "hidden" value = "<?php 
                                         echo $_POST['mail']; ?>" name = "mail">
+        <?php
+        if(isset($_POST['password'])){
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+   } ?>
         <input type = "hidden" value = "<?php 
-                                        echo $_POST['password'] ; ?>" name = "password_hash">
+                                        echo $_POST['password']; ?>" name = "password">
         <input type = "hidden" value = "<?php 
                                         echo $_POST['gender']; ?>" name = "gender">
         <input type = "hidden" value = "<?php 
