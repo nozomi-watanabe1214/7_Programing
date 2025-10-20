@@ -106,10 +106,9 @@
                                         echo $_POST['last_name_kana']; ?>" name = "last_name_kana">
         <input type = "hidden" value = "<?php 
                                         echo $_POST['mail']; ?>" name = "mail">
-        <?php
-        $password_after = password_hash($_POST['password'],PASSWORD_DEFAULT) ?>
+        
         <input type = "hidden" value = "<?php 
-                                        echo $password_after; ?>" name = "password">
+                                        echo $_POST['password']; ?>" name = "password">
         <input type = "hidden" value = "<?php 
                                         echo $_POST['gender']; ?>" name = "gender">
         <input type = "hidden" value = "<?php 
