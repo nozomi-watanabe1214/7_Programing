@@ -107,11 +107,9 @@
         <input type = "hidden" value = "<?php 
                                         echo $_POST['mail']; ?>" name = "mail">
         <?php
-        if(isset($_POST['password'])){
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-   } ?>
+        $password_after = password_hash($_POST['password'],PASSWORD_DEFAULT) ?>
         <input type = "hidden" value = "<?php 
-                                        echo $_POST['password']; ?>" name = "password">
+                                        echo $password_after; ?>" name = "password">
         <input type = "hidden" value = "<?php 
                                         echo $_POST['gender']; ?>" name = "gender">
         <input type = "hidden" value = "<?php 
