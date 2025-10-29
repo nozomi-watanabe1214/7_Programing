@@ -22,9 +22,9 @@ h1{
 }
 
 h2{
-    position: absolute;
-    top: 50%;
-    left: 40%;
+    text-align:center;
+    height:100px;
+    line-height:420px;
 }
 
 .submit{
@@ -36,8 +36,8 @@ h2{
     color: white;
     background-color: darkgray;
     border-radius: 5px;
-    margin-left: 520px;
-    margin-top: 570px;
+    margin-left: 550px;
+    margin-top: 450px;
 }
 
 footer{
