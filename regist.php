@@ -1,14 +1,3 @@
-<?php
-$family_name_error = "";
-$last_name_error = "";
-    if(empty($_POST["family_name"])){
-        $family_name_error = "名前(性)が未入力です";
-    }
-    if(empty($_POST["last_name"])){
-        $last_name_error = "名前(名)が未入力です";
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -26,7 +15,6 @@ $last_name_error = "";
         <div>
             <label>名前(性)</label>
             <input type = "text" class = "text" size = "35"  name ="family_name" maxlength = "10" pattern = "^[ぁ-ん一-龠ー]*$" required>
-            //正規表現について調べてみる。（詳しい表記方法など）
         </div> 
         
         <div>
@@ -146,7 +134,6 @@ $last_name_error = "";
         
         <div>
             <input type = "submit" class = "submit" value = "確認する">
-
         </div>
     
             </form>
