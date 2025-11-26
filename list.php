@@ -1,3 +1,11 @@
+<?php
+
+mb_internal_encoding("UTF8");
+$pdo = new PDO("mysql:dbname=registration;host=localhost;","root","");
+$stmt = $pdo -> query("select * from account");
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -10,8 +18,6 @@
         <header></header>
         
     <h1>アカウント一覧画面</h1>
-        
-        
         if(mysqli_num_rows($result) > 0){
         $table = '
         <table>
@@ -34,6 +40,7 @@
             
         
         }
+    
             </table>
         
         
