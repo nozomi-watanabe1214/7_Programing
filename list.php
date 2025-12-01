@@ -56,8 +56,33 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                 ?>
 
                 <tr>
-                <td><?php echo ($row['id'])?></td>
-                <td><?php echo ($row['family_name'])?></td>
+                    <td><?php echo ($row['id']) ?></td>
+                    <td><?php echo ($row['family_name'])?></td>
+                    <td><?php echo ($row['last_name'])?></td>
+                    <td><?php echo ($row['family_name_kana'])?></td>
+                    <td><?php echo ($row['last_name_kana'])?></td>
+                    <td><?php echo ($row['mail'])?></td>
+                    <td><?php if($row['gender'] == 0){
+                            echo "男";
+                            } else if($row['gender'] == 1){
+                                echo "女";
+                            } ?>
+                    </td>
+                    <td><?php if($row['authority'] == 0){
+                            echo "一般";
+                            } else if($row['authority'] == 1){
+                                echo "管理者";
+                            } ?>
+                    </td>
+                    <td><?php if($row['delete_flag'] == 0){
+                            echo "有効";
+                            } else if($row['delete_flag'] == 1){
+                                echo "無効";
+                            } ?>
+                    </td>
+                    <td><?php echo($row['registered_time']== 'Y-m-d')?></td>
+                
+                
                 </tr>
                 
                 <?php endforeach; ?>
