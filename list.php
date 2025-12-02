@@ -49,7 +49,7 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                     <th>削除フラグ</th>
                     <th>登録日時</th>
                     <th>更新日時</th>
-                    <th>操作</th>
+                    <th colspan = "2">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,22 +83,24 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                             } ?>
                     </td>
                     <td><?php 
-                        if
-                        ($date = new DateTime($row['registered_time'])){
-                        echo $date -> format('Y-m-d');
+                        if($date = new DateTime($row['registered_time'])){
+                            echo $date -> format('Y-m-d');
                         }
-                        else if ($row['null']){;
-                        echo null;
-                                              }?>
-                    </td>
-                    <td><?php if
-                        ($date = new DateTime($row['update_time'])){
-                        echo $date -> format('Y-m-d');
-                        }
-                        else if($date = null){
+                        else if ($date == null){
                             echo null;
                         }?>
                     </td>
+                    <td><?php
+                        if($date = new DateTime($row['update_time'])){
+                            echo $date -> format('Y-m-d');
+                        }
+                        else if($date == null){
+                            echo "なし";
+                        }?>
+                    </td>
+                    
+                    <td>更新</td>
+                    <td>削除</td>
 
 
                 
