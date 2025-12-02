@@ -19,6 +19,9 @@ $stmt -> execute();
 
 $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
+//$data = new PDO('SELECT * FROM account ORDER BY id DESC');
+
+$date = 'registered_time';
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +83,9 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                                 echo "無効";
                             } ?>
                     </td>
-                    <td><?php echo($row['registered_time']== 'Y-m-d')?></td>
+                    <td><?php $date = 'registered_time';
+    echo date('Y/m/d', strtotime($date)); ?></td>
+                    <td><?php echo($row['update_time']== 'Y-m-d')?></td>
                 
                 
                 </tr>
