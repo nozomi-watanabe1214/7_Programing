@@ -21,7 +21,6 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
 //$data = new PDO('SELECT * FROM account ORDER BY id DESC');
 
-$date = 'registered_time';
 ?>
 
 <!DOCTYPE html>
@@ -83,9 +82,25 @@ $date = 'registered_time';
                                 echo "無効";
                             } ?>
                     </td>
-                    <td><?php $date = 'registered_time';
-    echo date('Y/m/d', strtotime($date)); ?></td>
-                    <td><?php echo($row['update_time']== 'Y-m-d')?></td>
+                    <td><?php 
+                        if
+                        ($date = new DateTime($row['registered_time'])){
+                        echo $date -> format('Y-m-d');
+                        }
+                        else if ($row['null']){;
+                        echo null;
+                                              }?>
+                    </td>
+                    <td><?php if
+                        ($date = new DateTime($row['update_time'])){
+                        echo $date -> format('Y-m-d');
+                        }
+                        else if($date = null){
+                            echo null;
+                        }?>
+                    </td>
+
+
                 
                 
                 </tr>
