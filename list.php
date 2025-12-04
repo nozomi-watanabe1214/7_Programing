@@ -19,8 +19,6 @@ $stmt -> execute();
 
 $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-//$data = new PDO('SELECT * FROM account ORDER BY id DESC');
-
 ?>
 
 <!DOCTYPE html>
@@ -82,13 +80,22 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                                 echo "無効";
                             } ?>
                     </td>
-                    <td><?php 
+                    <td><?php
                         if($date = new DateTime($row['registered_time'])){
                             echo $date -> format('Y-m-d');
-                        }
-                        else if ($date == null){
-                            echo null;
-                        }?>
+                        } elseif($date = new DateTime($row['registered_time']==null)){
+                            echo "";
+                            endif;
+                                // 何も表示しない場合はここを空欄にする
+                        } 
+                        
+                        //if($date = new DateTime($row['registered_time'])){
+                          //  echo $date -> format('Y-m-d');
+                        //}
+                        //else if ($date == null){
+                          //  echo null;
+                        //}
+                        ?>
                     </td>
                     <td><?php
                         if($date = new DateTime($row['update_time'])){
