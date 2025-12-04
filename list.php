@@ -11,11 +11,11 @@ $data = [];
 
 $dbh = new PDO($dsn, $user, $password);
 
-$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flag, registered_time, update_time FROM account';
+$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
 
 $stmt = $dbh -> prepare($sql); 
 
-$stmt -> execute();
+$stmt -> execute(); 
 
 $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
@@ -99,8 +99,8 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         }?>
                     </td>
                     
-                    <td>更新</td>
-                    <td>削除</td>
+                    <td><input type="submit" class="submit" value="更新"></td>
+                    <td><input type="submit" class="submit" value="削除"></td>
 
 
                 
