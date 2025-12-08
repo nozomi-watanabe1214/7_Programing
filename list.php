@@ -80,30 +80,28 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                                 echo "無効";
                             } ?>
                     </td>
-                    <td><?php
-                        if($date = new DateTime($row['registered_time'])){
-                            echo $date -> format('Y-m-d');
-                        } elseif($date = new DateTime($row['registered_time']==null)){
+                    <td>
+                        <?php
+                        if(empty($row['registered_time'])){
                             echo "";
-                            endif;
-                                // 何も表示しない場合はここを空欄にする
+                           
                         } 
-                        
-                        //if($date = new DateTime($row['registered_time'])){
-                          //  echo $date -> format('Y-m-d');
-                        //}
-                        //else if ($date == null){
-                          //  echo null;
-                        //}
+                        elseif($date = new DateTime($row['registered_time'])){
+                            echo $date -> format('Y-m-d');
+                            
+                                // 何も表示しない場合はここを空欄にする
+                        }
                         ?>
                     </td>
-                    <td><?php
-                        if($date = new DateTime($row['update_time'])){
-                            echo $date -> format('Y-m-d');
+                    <td>
+                        <?php
+                        if(empty($row['update_time'])){
+                            echo "";
                         }
-                        else if($date == null){
-                            echo "なし";
+                        elseif($date = new DateTime($row['update_time'])){
+                            echo $date -> format('Y-m-d');
                         }?>
+                        
                     </td>
                     
                     <td><input type="submit" class="submit" value="更新"></td>
