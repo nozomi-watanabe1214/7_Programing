@@ -104,8 +104,9 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         
                     </td>
                     
-                    <td><input type="submit" class="submit" value="更新"></td>
-                    <td><input type="submit" class="submit" value="削除"></td>
+                    <td><form method = "post" action = "update.php"><input type = "submit" class = "submit" value = "更新"></form></td>
+                    <td><form method = "post" action = "delete.php"><input type = "submit" class = "submit" value = "削除"></form>
+                    <input type = hidden name = id value = ".$account['id']. "></td>
 
 
                 
