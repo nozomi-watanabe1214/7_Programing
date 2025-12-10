@@ -105,13 +105,14 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                     </td>
                     
                     <td><form method = "post" action = "update.php"><input type = "submit" class = "submit" value = "更新"></form></td>
-                    <td><form method = "post" action = "delete.php"><input type = "submit" class = "submit" value = "削除"></form>
-                    <input type = hidden name = id value = ".$account['id']. "></td>
-
-
-                
-                
-                </tr>
+                   
+                        <?php
+                        echo "<form action = delete.php method = post>";
+                        echo "<input type = hidden name = id value =".$row['id'].">";
+                        echo "<td><input type = submit value = 削除></td>";
+                    echo "</form>";
+                        ?>
+                    </tr>
                 
                 <?php endforeach; ?>
             </tbody>
