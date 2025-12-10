@@ -7,20 +7,23 @@ $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
 $user = "root";
 $password = "";
 $data = [];
-    
+
+
+$data = [];
+
 $dbh = new PDO($dsn, $user, $password);
 
-try{
-    $pdo = new PDO($dsn, $user, $password);
-} catch(PDOException $e){
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
+$sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority FROM account where id = '$id'";
 
-$accountId = $account['id'];
+//try{
+    //$pdo = new PDO($dsn, $user, $password);
+//} catch(PDOException $e){
+    //throw new \PDOException($e->getMessage(), (int)$e->getCode());
+//}
 
-$stmt = $pdo->prepare("SELECT * FROM account WHERE id = ?");
+//$stmt = $pdo->prepare("SELECT * FROM account WHERE id = ?");
 
-$account = $stmt->fetch();
+//$account = $stmt->fetch();
 
 ?>
 
@@ -41,13 +44,10 @@ $account = $stmt->fetch();
     <h1>アカウント削除画面</h1>
     
     <form method="post" action="?">
-        <?php
-        if($account)
-            ?>
-        
+
         <div>
             <label>名前(性)</label>
-            echo $account['family_name']; 
+            <?php echo $row['family_name']; ?>
         </div>
         
         <div>
