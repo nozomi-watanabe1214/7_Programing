@@ -19,13 +19,23 @@ try{
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
-//$stmt = $pdo->prepare("SELECT * FROM account WHERE id = ?");
+$stmt = $pdo->prepare("SELECT * FROM account WHERE id = '".$_POST['id']."'");
 
-$family_name = filter_input(INPUT_POST, 'family_name');
-//echo "select * from users where id in ($id)";
+//$family_name = filter_input(INPUT_POST, 'family_name');
+//$last_name = filter_input(INPUT_POST, 'last_name');
+//$family_name_kana = filter_input(INPUT_POST, 'family_name_kana');
+//$last_name_kana = filter_input(INPUT_POST, 'last_name_kana');
+//$mail = filter_input(INPUT_POST, 'mail');
+//$password = filter_input(INPUT_POST, 'password');
+//echo "select * from account where id in ($id)";
+
+$stmt -> execute(); 
+
+$data = $stmt -> fetch();
 
 ?>
 
+//idデータを1つもらう
 
 <!docutype HTML>
 <html lang = "ja">
@@ -51,7 +61,7 @@ $family_name = filter_input(INPUT_POST, 'family_name');
         
         <div>
             <label>名前(名)</label>
-            <?php echo $_POST['id']; ?>
+            <?php echo $_POST['last_name']; ?>
         </div>
         
         <div>
