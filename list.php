@@ -11,7 +11,7 @@ $data = [];
 
 $dbh = new PDO($dsn, $user, $password);
 
-$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
+$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
 
 $stmt = $dbh -> prepare($sql); 
 
@@ -108,8 +108,14 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                    
                         <?php
                         echo "<form action = delete.php method = post>";
-                    echo "<input type = hidden name = family_name value =".$row['family_name'].">";
+                    echo "<input type = hidden name = id value =".$row['id'].">";
+                    //echo "<input type = hidden name = last_name value =".$row['last_name'].">";
+                    //echo "<input type = hidden name = family_name_kana value =".$row['family_name_kana'].">";
+                    //echo "<input type = hidden name = last_name_kana value =".$row['last_name_kana'].">";
+                    //echo "<input type = hidden name = mail =".$row['mail'].">";
+                    //echo "<input type = hidden name = password value =".$_POST['password'].">";
                     echo "<td><input type = submit value = 削除></td>";
+                    
                     echo "</form>";
                         ?>
                     </tr>
