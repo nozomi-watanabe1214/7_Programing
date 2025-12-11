@@ -13,17 +13,16 @@ $data = [];
 
 $dbh = new PDO($dsn, $user, $password);
 
-$sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority FROM account where id = '$id'";
-
-//try{
-    //$pdo = new PDO($dsn, $user, $password);
-//} catch(PDOException $e){
-    //throw new \PDOException($e->getMessage(), (int)$e->getCode());
-//}
+try{
+    $pdo = new PDO($dsn, $user, $password);
+} catch(PDOException $e){
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+}
 
 //$stmt = $pdo->prepare("SELECT * FROM account WHERE id = ?");
 
-//$account = $stmt->fetch();
+$family_name = filter_input(INPUT_POST, 'family_name');
+//echo "select * from users where id in ($id)";
 
 ?>
 
@@ -47,12 +46,12 @@ $sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, g
 
         <div>
             <label>名前(性)</label>
-            <?php echo $row['family_name']; ?>
+            <?php echo $_POST['family_name']; ?>
         </div>
         
         <div>
             <label>名前(名)</label>
-            <?php echo $_POST['last_name']; ?>
+            <?php echo $_POST['id']; ?>
         </div>
         
         <div>
