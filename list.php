@@ -108,7 +108,7 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                    
                         <?php
                         echo "<form action = delete.php method = post>";
-                        echo "<input type = hidden name = id value =".$row['id'].">";
+                        echo "<input type = hidden name = family_name value =".$row['family_name'].">";
                         echo "<td><input type = submit value = 削除></td>";
                     echo "</form>";
                         ?>
