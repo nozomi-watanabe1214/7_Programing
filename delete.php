@@ -8,9 +8,6 @@ $user = "root";
 $password = "";
 $data = [];
 
-
-$data = [];
-
 $dbh = new PDO($dsn, $user, $password);
 
 try{
@@ -19,7 +16,7 @@ try{
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
-$stmt = $pdo->prepare("SELECT * FROM account WHERE id = '".$_POST['id']."'");
+$sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority FROM account where id = {$_POST['id']}";
 
 //$family_name = filter_input(INPUT_POST, 'family_name');
 //$last_name = filter_input(INPUT_POST, 'last_name');
@@ -27,15 +24,13 @@ $stmt = $pdo->prepare("SELECT * FROM account WHERE id = '".$_POST['id']."'");
 //$last_name_kana = filter_input(INPUT_POST, 'last_name_kana');
 //$mail = filter_input(INPUT_POST, 'mail');
 //$password = filter_input(INPUT_POST, 'password');
-//echo "select * from account where id in ($id)";
+echo "select * from account where id in {$_POST['id']}";
 
-$stmt -> execute(); 
+$stmt = $pdo->query("SELECT * FROM account WHERE id = ''");
 
-$data = $stmt -> fetch();
+$account = $stmt->fetch();
 
 ?>
-
-//idデータを1つもらう
 
 <!docutype HTML>
 <html lang = "ja">
@@ -53,7 +48,10 @@ $data = $stmt -> fetch();
     <h1>アカウント削除画面</h1>
     
     <form method="post" action="?">
-
+        
+        <?php
+        if($account)
+            ?>
         <div>
             <label>名前(性)</label>
             <?php echo $_POST['family_name']; ?>
@@ -132,7 +130,7 @@ $data = $stmt -> fetch();
         
             ?>
         </div>
-    
+
          <footer></footer>
     </form>
 
