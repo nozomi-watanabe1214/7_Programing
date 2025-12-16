@@ -134,6 +134,7 @@ $account = $stmt->fetchAll();
         <div>
             <input type = "submit" class = "submit" value = "確認する">
         </div>
+        
     </form>
 
          <footer></footer>
