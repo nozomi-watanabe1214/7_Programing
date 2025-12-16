@@ -16,7 +16,7 @@ try{
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
-$sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority FROM account where id = {$_POST['id']}";
+$sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority FROM account where id = {$_POST['id']}";
 
 //$family_name = filter_input(INPUT_POST, 'family_name');
 //$last_name = filter_input(INPUT_POST, 'last_name');
@@ -24,11 +24,11 @@ $sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, g
 //$last_name_kana = filter_input(INPUT_POST, 'last_name_kana');
 //$mail = filter_input(INPUT_POST, 'mail');
 //$password = filter_input(INPUT_POST, 'password');
-//echo "select * from account where id in {$_POST['id']}";
+echo "select * from account where id in {$_POST['id']}";
 
-$stmt = $pdo->query("SELECT * FROM account WHERE id = ''");
+$stmt = $pdo->query($sql);
 
-$account = $stmt->fetchAll();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);//　$rowに$_POST['id']のユーザー列をfetch(PDO::FETCH_ASSOC)にて取得
 
 ?>
 
@@ -49,38 +49,35 @@ $account = $stmt->fetchAll();
     
     <form method = "post" action= "delete_confirm.php">
         
-        <?php
-        if($account)
-            ?>
         <div>
             <label>名前(性)</label>
-            <?php echo $_POST['family_name']; ?>
+            <?php echo ($row['family_name']); ?>
         </div>
         
         <div>
             <label>名前(名)</label>
-            <?php echo $_POST['last_name']; ?>
+            <?php echo $row['last_name']; ?>
         </div>
         
         <div>
             <label>カナ(性)</label>
-            <?php echo $_POST['family_name_kana']; ?>
+            <?php echo $row['family_name_kana']; ?>
         </div>
     
         <div>
             <label>カナ(名)</label>
-            <?php echo $_POST['last_name_kana']; ?>
+            <?php echo $row['last_name_kana']; ?>
         </div>
 
         <div>
             <label>メールアドレス</label>
-            <?php echo $_POST['mail']; ?>
+            <?php echo $row['mail']; ?>
         </div>
         
         <div>
            <label>パスワード</label>
            <?php 
-            $password = $_POST['password']??'';
+            $password = $row['password']??'';
             $pass = mb_strlen($password, 'UTF-8');
             for ($i=1; $i<=$pass; $i++){
                 echo "●";
@@ -91,9 +88,9 @@ $account = $stmt->fetchAll();
         <div>
             <label>性別</label>
             <?php 
-            if($_POST['gender'] == 0){
+            if($row['gender'] == 0){
                 echo "男";
-            } else if($_POST['gender'] == 1){
+            } else if($row['gender'] == 1){
                 echo "女";
             }
             ?>
@@ -101,30 +98,30 @@ $account = $stmt->fetchAll();
         
         <div>
             <label>郵便番号</label>
-            <?php echo $_POST['postal_code']; ?>
+            <?php echo $row['postal_code']; ?>
         </div>
         
         <div>
             <label>住所（都道府県）</label>
-            <?php echo $_POST['prefecture']; ?>
+            <?php echo $row['prefecture']; ?>
         </div>
         
         <div>
             <label>住所（市区町村）</label>
-            <?php echo $_POST['address_1']; ?>
+            <?php echo $row['address_1']; ?>
         </div>
         
         <div>
             <label>住所（番地）</label>
-            <?php echo $_POST['address_2']; ?>
+            <?php echo $row['address_2']; ?>
         </div>
         
         <div>
             <label>アカウント権限</label>
             <?php
-            if($_POST['authority'] == 0){
+            if($row['authority'] == 0){
                 echo "一般";
-            } else if($_POST['authority'] == 1){
+            } else if($row['authority'] == 1){
                 echo "管理者";
             }
         
