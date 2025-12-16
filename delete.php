@@ -24,11 +24,11 @@ $sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, g
 //$last_name_kana = filter_input(INPUT_POST, 'last_name_kana');
 //$mail = filter_input(INPUT_POST, 'mail');
 //$password = filter_input(INPUT_POST, 'password');
-echo "select * from account where id in {$_POST['id']}";
+//echo "select * from account where id in {$_POST['id']}";
 
 $stmt = $pdo->query("SELECT * FROM account WHERE id = ''");
 
-$account = $stmt->fetch();
+$account = $stmt->fetchAll();
 
 ?>
 
@@ -47,7 +47,7 @@ $account = $stmt->fetch();
     
     <h1>アカウント削除画面</h1>
     
-    <form method="post" action="?">
+    <form method = "post" action= "delete_confirm.php">
         
         <?php
         if($account)
@@ -130,9 +130,13 @@ $account = $stmt->fetch();
         
             ?>
         </div>
+        
+        <div>
+            <input type = "submit" class = "submit" value = "確認する">
+        </div>
+    </form>
 
          <footer></footer>
-    </form>
 
 </body>
 </html>
