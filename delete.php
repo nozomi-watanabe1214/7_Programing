@@ -24,7 +24,7 @@ $sql = "SELECT family_name, last_name, family_name_kana, last_name_kana, mail, p
 //$last_name_kana = filter_input(INPUT_POST, 'last_name_kana');
 //$mail = filter_input(INPUT_POST, 'mail');
 //$password = filter_input(INPUT_POST, 'password');
-echo "select * from account where id in {$_POST['id']}";
+//echo "select * from account where id in {$_POST['id']}";
 
 $stmt = $pdo->query($sql);
 
