@@ -50,43 +50,36 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);//　$rowに$_POST['id']のユーザー列
     <form method = "post" action= "delete_confirm.php">
         
         <div>
-            <label>名前(性)</label>
+            <label>名前(性):</label>
             <?php echo ($row['family_name']); ?>
         </div>
         
         <div>
-            <label>名前(名)</label>
+            <label>名前(名):</label>
             <?php echo $row['last_name']; ?>
         </div>
         
         <div>
-            <label>カナ(性)</label>
+            <label>カナ(性):</label>
             <?php echo $row['family_name_kana']; ?>
         </div>
     
         <div>
-            <label>カナ(名)</label>
+            <label>カナ(名):</label>
             <?php echo $row['last_name_kana']; ?>
         </div>
 
         <div>
-            <label>メールアドレス</label>
+            <label>メールアドレス:</label>
             <?php echo $row['mail']; ?>
         </div>
         
         <div>
-           <label>パスワード</label>
-           <?php 
-            $password = $row['password']??'';
-            $pass = mb_strlen($password, 'UTF-8');
-            for ($i=1; $i<=$pass; $i++){
-                echo "●";
-            } ?>
-        
+           <label>パスワード:</label>
         </div>
         
         <div>
-            <label>性別</label>
+            <label>性別:</label>
             <?php 
             if($row['gender'] == 0){
                 echo "男";
@@ -97,27 +90,27 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);//　$rowに$_POST['id']のユーザー列
         </div>
         
         <div>
-            <label>郵便番号</label>
+            <label>郵便番号:</label>
             <?php echo $row['postal_code']; ?>
         </div>
         
         <div>
-            <label>住所（都道府県）</label>
+            <label>住所（都道府県）:</label>
             <?php echo $row['prefecture']; ?>
         </div>
         
         <div>
-            <label>住所（市区町村）</label>
+            <label>住所（市区町村）:</label>
             <?php echo $row['address_1']; ?>
         </div>
         
         <div>
-            <label>住所（番地）</label>
+            <label>住所（番地）:</label>
             <?php echo $row['address_2']; ?>
         </div>
         
         <div>
-            <label>アカウント権限</label>
+            <label>アカウント権限:</label>
             <?php
             if($row['authority'] == 0){
                 echo "一般";
