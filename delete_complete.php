@@ -12,21 +12,24 @@ $dbh = new PDO($dsn, $user, $password);
 
 try{
     $pdo = new PDO($dsn, $user, $password);
-    $pdo -> exec("insert into account(delete_flag)values(1)");
 } catch(PDOException $e){
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
 
-//$account_id = $_POST['id'];
+$account_id = $_POST['id'];
+
+$sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account where id = {$_POST['id']}";
 
 //$sql = "UPDATE account SET delete_flag = '1' WHERE id = ?";
- 
-//$stmt = $pdo->prepare($sql);
 
-//$stmt->execute([$account_id]);
+$pdo -> exec("UPDATE account SET(delete_flag)values(1)");
+
+$stmt = $pdo->prepare($sql);
+
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
