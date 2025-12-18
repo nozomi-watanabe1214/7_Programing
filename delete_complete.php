@@ -10,24 +10,21 @@ $data = [];
 
 $dbh = new PDO($dsn, $user, $password);
 
-try{
-    $pdo = new PDO($dsn, $user, $password);
-} catch(PDOException $e){
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+ $pdo = new PDO($dsn, $user, $password);
+
+if (isset($_POST['id'])) {
+    $account_id = $_POST['id'];
+    
+  $stmt = $pdo->prepare ("UPDATE account SET delete_flag = '1' WHERE id = ?");
+
+    $stmt->bindParam(':id', $account_id, PDO::PARAM_INT);
+    $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+} else {
+    $stmt->error;
 }
 
-
-$account_id = $_POST['id'];
-
-$sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account where id = {$_POST['id']}";
-
-//$sql = "UPDATE account SET delete_flag = '1' WHERE id = ?";
-
-$pdo -> exec("UPDATE account SET(delete_flag)values(1)");
-
-$stmt = $pdo->prepare($sql);
-
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
+//$sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account where id = {$_POST['id']}";
 
 ?>
 
