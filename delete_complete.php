@@ -12,21 +12,19 @@ $dbh = new PDO($dsn, $user, $password);
 
  $pdo = new PDO($dsn, $user, $password);
 
-if (isset($_POST['id'])) {
+if (isset($_POST['delete_flag']) && !empty($_POST['id'])) {
+    // 選択されたアカウントIDの配列を取得
     $account_id = $_POST['id'];
     
-  $stmt = $pdo->prepare ("UPDATE account SET delete_flag = '1' WHERE id = {$account_id}");
+    $sql = "UPDATE account SET delete_flag = '1' WHERE id = ($account_id)";
 
-    $stmt->bindParam(':id', $account_id, PDO::PARAM_INT);
-    $stmt -> fetchAll(PDO::FETCH_ASSOC);
-
+    $stmt = $pdo->query($sql);
+    
 } else {
     $stmt->error;
 }
 
 $delete_flag = date('Y-m-d H:i:s');
-
-//$sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account where id = {$_POST['id']}";
 
 ?>
 
@@ -44,7 +42,7 @@ $delete_flag = date('Y-m-d H:i:s');
         <h1>アカウント削除完了画面</h1>
         <form method = "post">
             
-        <div class = "complete">
+        <div>
             <h2>削除完了しました。</h2>
         </div>
               
