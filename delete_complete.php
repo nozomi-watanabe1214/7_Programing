@@ -8,9 +8,12 @@ $user = "root";
 $password = "";
 $data = [];
 
-$dbh = new PDO($dsn, $user, $password);
+$success_message = '';
+$error_message = '';
 
- $pdo = new PDO($dsn, $user, $password);
+$dbh = new PDO($dsn, $user, $password);
+    
+$pdo = new PDO($dsn, $user, $password);
 
 if (isset($_POST['delete_flag']) && !empty($_POST['id'])) {
     // 選択されたアカウントIDの配列を取得
@@ -20,8 +23,9 @@ if (isset($_POST['delete_flag']) && !empty($_POST['id'])) {
 
     $stmt = $pdo->query($sql);
     
-} else {
-    $stmt->error;
+    $success_message = "削除完了しました";
+} else{
+    $error_message = "エラーが発生したためアカウント削除できません";
 }
 
 $delete_flag = date('Y-m-d H:i:s');
@@ -40,17 +44,23 @@ $delete_flag = date('Y-m-d H:i:s');
         <header></header>
         
         <h1>アカウント削除完了画面</h1>
-        <form method = "post">
             
-        <div>
-            <h2>削除完了しました。</h2>
+            <div class = "complete">
+            <?php if ($success_message): ?>
+            <h2 style = "color:black">
+            <?php echo ($success_message); ?></h2>
+            
+            <?php endif; ?>
+            
+            <?php if ($error_message): ?>
+            <h2 style = "color:red;"><?php echo ($error_message); ?></h2>
+            
+            <?php endif; ?>
+                
+                <form action="list.php">
+                    <input type = "submit" class = "submit" value = "TOPページへ戻る"></form>
         </div>
-              
-        <div>
-            <input type = "submit" class = "submit" value = "TOPページへ戻る" formaction="list.php">
-        </div>
-        </form>
-        
+
         <footer></footer>
         
     </body>
