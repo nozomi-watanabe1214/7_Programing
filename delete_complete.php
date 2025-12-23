@@ -44,8 +44,8 @@ $delete_flag = date('Y-m-d H:i:s');
         <header></header>
         
         <h1>アカウント削除完了画面</h1>
-            
-            <div class = "complete">
+        
+        <div class = "complete">
             <?php if ($success_message): ?>
             <h2 style = "color:black">
             <?php echo ($success_message); ?></h2>
@@ -56,9 +56,9 @@ $delete_flag = date('Y-m-d H:i:s');
             <h2 style = "color:red;"><?php echo ($error_message); ?></h2>
             
             <?php endif; ?>
-                
-                <form action="list.php">
-                    <input type = "submit" class = "submit" value = "TOPページへ戻る"></form>
+        
+        <form action="index.html">
+            <input type = "submit" class = "submit" value = "TOPページへ戻る"></form>
         </div>
 
         <footer></footer>
