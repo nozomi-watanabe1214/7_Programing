@@ -74,8 +74,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
         <div>
             <label>性別</label>
-            <input type = "radio" name = "gender" value = "0">男
-            <input type = "radio" name = "gender" value = "1" required>女
+            <label><input type = "radio" name = "gender" value = "0">男</label>
+            <label><input type = "radio" name = "gender" value = "1" required>女</label>
         </div>
         
         <div>
@@ -87,7 +87,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
             <label>住所（都道府県）</label>
             <select name="prefecture" required>
-                <option value="" disabled selected></option>
+                <option value="" selected></option>
                 <option value="北海道">北海道</option>
                 <option value="青森県">青森県</option>
                 <option value="岩手県">岩手県</option>
@@ -153,8 +153,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
             <label>アカウント権限</label>
             <select name = "authority" required>
-                <option value = "0">一般</option>
-                <option value = "1">管理者</option>
+                <option value = "{$row[authority]}" @if ($row[authority]="0") selected @endif>一般</option>
+                <option value = "{$row[authority]}" @if ($row[authority]="1") selected @endif>管理者</option>
             </select>
         </div> 
         
