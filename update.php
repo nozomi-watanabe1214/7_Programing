@@ -153,8 +153,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
             <label>アカウント権限</label>
             <select name = "authority" required>
-                <option value = "{$row[authority]}" @if ($row[authority]="0") selected @endif>一般</option>
-                <option value = "{$row[authority]}" @if ($row[authority]="1") selected @endif>管理者</option>
+                <option value = "0" {% if ($row[authority]="0") %}selected{% endif %}>一般</option>
+                <option value = "1" {% if ($row[authority]="1") %}selected{% endif %}>管理者</option>
             </select>
         </div> 
         
