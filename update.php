@@ -157,6 +157,13 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 <option value = "1" {% if 1 in account.authority %}selected{% endif %}>管理者</option>
             </select>
         </div> 
+        //phpの書き方<?phpへ変更するif文にてechoする値をセレクトする
+    <?php　
+    if($row['authority'] == 0){
+                echo "一般";
+            } else if($row['authority'] == 1){
+                echo "管理者";
+            }
         
         <div>
             <input type = "submit" class = "submit" value = "確認する">
