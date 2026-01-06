@@ -154,13 +154,19 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
             <label>アカウント権限</label>
             <select name = "authority" required>            
-                 <?php
+                 <option value="0"
+                <?php
     if($row['authority'] == 0){
-        echo "<option selected>"."一般"."</option>";
-    } else if($row['authority'] == 1){
-            echo "<option selected>"."管理者"."</option>";
-        }
-                ?>
+        echo 'selected';
+    }
+                         ?>>一般</option>
+                
+   <option value="1"
+                <?php
+    if($row['authority'] == 1){
+        echo 'selected';
+    }
+           ?>>管理者</option>
             </select>
         </div> 
         
