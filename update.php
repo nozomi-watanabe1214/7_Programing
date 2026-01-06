@@ -153,18 +153,20 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
             <label>アカウント権限</label>
             <select name = "authority" required>
-                <option value = "0" {% if 0 in account.authority %}selected{% endif %}>一般</option>
-                <option value = "1" {% if 1 in account.authority %}selected{% endif %}>管理者</option>
+                <option value = "<?php
+        if($row['authority'] == 0){
+            echo "一般";
+        } else if($row['authority'] == 1){
+            echo "管理者";
+        }
+                ?>">
             </select>
         </div> 
         //phpの書き方<?phpへ変更するif文にてechoする値をセレクトする
-    <?php　
-    if($row['authority'] == 0){
-                echo "一般";
-            } else if($row['authority'] == 1){
-                echo "管理者";
-            }
-        
+    
+                   
+                   //= "0" {% if 0 in account.authority %}selected{% endif %}>一般</option>
+                //<option value = "1" {% if 1 in account.authority %}selected{% endif %}>管理者</option>
         <div>
             <input type = "submit" class = "submit" value = "確認する">
         </div>
