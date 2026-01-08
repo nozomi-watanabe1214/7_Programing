@@ -28,7 +28,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
-        <title>アカウント登録画面</title>
+        <title>アカウント更新画面</title>
         <link rel = "stylesheet" type = "text/css" href = "style9.css">
     </head>
     
@@ -407,33 +407,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
             <input type = "submit" class = "submit" value = "確認する">
             <input type = "hidden" value = "<?php 
-                                        echo $_POST['id']; ?>" name = "id">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['family_name']; ?>" name = "family_name">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['last_name']; ?>" name = "last_name">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['family_name_kana']; ?>" name = "family_name_kana">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['last_name_kana']; ?>" name = "last_name_kana">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['mail']; ?>" name = "mail">
-            <input type = "hidden" value = "<?php 
-                                        echo $_POST['password']; ?>" name = "password">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['gender']; ?>" name = "gender">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['postal_code']; ?>" name = "postal_code">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['prefecture']; ?>" name = "prefecture">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['address_1']; ?>" name = "address_1">
-            <input type = "hidden" value = "<?php 
-                                        echo $row['address_2']; ?>" name = "address_2">
-            <input type = "hidden" value = "<?php 
-                                        echo $_POST['authority']; ?>" name = "authority">
+                                        echo $_POST['id']; ?>">
         </div>
-    
             </form>
         
 
