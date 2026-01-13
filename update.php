@@ -417,7 +417,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
             <input type = "submit" class = "submit" value = "確認する">
             <input type = "hidden" value = "<?php 
-                                        echo $_POST['id']; ?>">
+                                        echo $_POST['id']; ?>" name = "id">
         </div>
             </form>
         
