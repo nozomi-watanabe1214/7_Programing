@@ -74,8 +74,18 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
         <div>
             <label>性別</label>
-            <label><input type = "radio" name = "gender" value = "0">男</label>
-            <label><input type = "radio" name = "gender" value = "1" required>女</label>
+            <label>
+                <input type = "radio" name = gender value = "0"
+                       <?php
+                       if ($row['gender'] == "0"){
+                           echo 'checked';
+                       } ?>>男</label>
+            <label>
+                <input type = "radio" name = gender value = "1"
+                       <?php
+                       if ($row['gender'] == "1"){
+                           echo 'checked';
+                       } ?>>女</label>
             
         </div>
         
