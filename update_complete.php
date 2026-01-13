@@ -11,28 +11,31 @@ $data = [];
 $success_message = '';
 $error_message = '';
 
+try{
 $dbh = new PDO($dsn, $user, $password);
 $pdo = new PDO($dsn, $user, $password);
 
-if (isset($_POST['update_flag']) && !empty($_POST['id'])) {
-    // 選択されたアカウントIDの配列を取得
-    $account_id = $_POST['id'];
+$password_after = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    
+    if(isset($_POST['password'])){
+    $password_after = password_hash($_POST['password'],
+                              PASSWORD_DEFAULT);
+    }
+    
+$update_time = date('Y-m-d H:i:s');
 
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$pdo -> exec("UPDATE account set(family_name,last_name,family_name_kana,last_name_kana,mail,password,gender,postal_code,prefecture,address_1,address_2,authority,update_time)
+values('".$_POST['family_name']."','".$_POST['last_name']."','".$_POST['family_name_kana']."','".$_POST['last_name_kana']."','".$_POST['mail']."','".$password_after."','".$_POST['gender']."','".$_POST['postal_code']."','".$_POST['prefecture']."','".$_POST['address_1']."','".$_POST['address_2']."','".$_POST['authority']."','".$update_time."');");
+    
+//$sql = "UPDATE account SET family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, update_time FROM account where id = {$_POST['id']}";
 
-$sql = "UPDATE account SET family_name = ?, last_name = ?, family_name_kana = ?,last_name_kana = ?, mail = ?, password = ?, gender = ?, postal_code = ?, prefecture = ?, address_1 = ?, address_2 = ?, authority = ?, update_flag = ? WHERE id = ?";
-
-$stmt = $pdo->prepare($sql);
-$stmt -> exec([$family_name,$last_name,$family_name_kana,$last_name_kana,$mail,$password_after,$gender,$postal_code,$prefecture,$address_1,$address_2,$authority,$registered_time]);
+//$stmt = $pdo->prepare($sql);
+//$stmt -> exec([$family_name,$last_name,$family_name_kana,$last_name_kana,$mail,$password_after,$gender,$postal_code,$prefecture,$address_1,$address_2,$authority,$update_time]);
     
     $success_message = "更新完了しました";
-} else{
-    $error_message = "エラーが発生したためアカウント更新できません";
+} catch(PDOException $e){
+    $error_message = "エラーが発生したためアカウント登録できませんでした";
 }
-
-$update_flag = date('Y-m-d H:i:s');
-
 ?>
 
 <!DOCTYPE html>
