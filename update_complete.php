@@ -53,7 +53,7 @@ $update -> execute();
 
 $success_message = "更新完了しました";
 } catch(PDOException $e){
-    $error_message = "エラーが発生したためアカウント登録できませんでした";
+    $error_message = "エラーが発生したためアカウント更新できません";
 }
 ?>
 
