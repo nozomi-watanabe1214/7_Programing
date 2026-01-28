@@ -3,29 +3,34 @@ session_start();
 
 $error_message = '';
 
-
-$dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
-
-$user = "root";
-$password = "";
-$data = [];
-
-$dbh = new PDO($dsn, $user, $password);
-
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $mail = $_POST['mail'];
     $password = $_POST['password'];
     
-    if($mail=='?' && $password==='?'){
-        $_SESSION['account']=$mail;
+    $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
+    
+    $user = "root";
+    $password = "";
+    
+    try{
+
+$pdo = new PDO($dsn, $user, $password);
+
+ $stmt = $pdo->prepare("SELECT * FROM account WHERE mail = ?");
+        $stmt->execute([$mail]);
+        $row = $stmt->fetch();
+    if ($row && password_verify($password, $row['password'])) {
+            $_SESSION['mail'] = $row['mail'];
+        
         header('Location:http://localhost/7_Programing/index.html');
             exit();
-        } else{
-            $error_message = "エラーが発生したためログイン情報を取得できません。";
+        }
+    } catch(PDOException $e){
+        $error_message = "エラーが発生したためログイン情報を取得できません。";
         }
     }
 ?>
-        
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -40,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           <h1>ログイン画面</h1>
         
         <div class="login">
-            <form action="" method="POST">
+            <form action="index.html" method="post">
                 
                 <div>
                 <label>メールアドレス</label>
@@ -62,3 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             <footer></footer>
         </div>
+    </body>
+</html>
+
+
