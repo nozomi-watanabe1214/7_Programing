@@ -1,3 +1,39 @@
+<?php
+mb_internal_encoding("utf8");
+
+$error_message = '';
+
+if(isset($_POST['login'])){
+    $mail = $_POST['mail'];
+    $password = $_POST['password'];
+    
+    try{
+        $pdo = new PDO("mysql:dbname=registration;host=localhost;","root","");
+        
+        $sql = 'SELECT COUNT(*) from account where mail=? and password=?';
+        
+        $stmt = $pdo -> prepare($sql);
+        
+        $stmt -> execute(array($mail, $password));
+        
+        $result = $stmt -> fetch();
+        
+        $stmt = null;
+        $pdo = null;
+        
+        if($result[0] !=0){
+            header('Location:http://localhost/7_Programing/index.html');
+            exit();
+        } else{
+            $error_message = "エラーが発生したためログイン情報を取得できません。";
+        }
+    } catch(PDOException $e){
+        echo $e -> getMessage();
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
