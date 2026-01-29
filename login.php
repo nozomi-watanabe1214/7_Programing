@@ -1,36 +1,38 @@
 <?php
+ 
 session_start();
 
+$dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
+
+$user = "root";
+$password = "";
+
+$pdo = new PDO("mysql:dbname=registration;host=localhost;","root","");
+
+$mail = '';
+$password = '';
 $error_message = '';
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $mail = $_POST['mail'];
-    $password = $_POST['password'];
-    
-    $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
-    
-    $user = "root";
-    $password = "";
-    
-    try{
+// POST送信があるかないか判定
+if (!empty($_POST)) {
+  $mail = $_POST['mail'];
+  $password = $_POST['password'];
+}
 
-$pdo = new PDO($dsn, $user, $password);
+$data = array(
+  'mail' => '',
+  'password' => ''
+);
 
- $stmt = $pdo->prepare("SELECT * FROM account WHERE mail = ?");
-        $stmt->execute([$mail]);
-        $row = $stmt->fetch();
-    if ($row && password_verify($password, $row['password'])) {
-            $_SESSION['mail'] = $row['mail'];
-        
-        header('Location:http://localhost/7_Programing/index.html');
-            exit();
-        }
-    } catch(PDOException $e){
-        $error_message = "エラーが発生したためログイン情報を取得できません。";
-        }
-    }
+if($data['password'] === $password){
+    //セッションにemailアドレスを挿入する
+    $_SESSION['mail'] = $mail;
+    header('Loction:http://localhost/7_Programing/index.html');
+    exit;
+  }else{
+    $error_message = "エラーが発生したためログイン情報を取得できません。";
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -45,7 +47,7 @@ $pdo = new PDO($dsn, $user, $password);
           <h1>ログイン画面</h1>
         
         <div class="login">
-            <form action="index.html" method="post">
+            <form action="" method="post">
                 
                 <div>
                 <label>メールアドレス</label>
