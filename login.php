@@ -1,38 +1,30 @@
 <?php
- 
 session_start();
+
+$error_message = '';
 
 $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
 
 $user = "root";
 $password = "";
+$data = [];
 
-$pdo = new PDO("mysql:dbname=registration;host=localhost;","root","");
+$dbh = new PDO($dsn, $user, $password);
 
-$mail = '';
-$password = '';
-$error_message = '';
-
-// POST送信があるかないか判定
-if (!empty($_POST)) {
-  $mail = $_POST['mail'];
-  $password = $_POST['password'];
-}
-
-$data = array(
-  'mail' => '',
-  'password' => ''
-);
-
-if($data['password'] === $password){
-    //セッションにemailアドレスを挿入する
-    $_SESSION['mail'] = $mail;
-    header('Loction:http://localhost/7_Programing/index.html');
-    exit;
-  }else{
-    $error_message = "エラーが発生したためログイン情報を取得できません。";
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $mail = $_POST['mail'];
+    $password = $_POST['password'];
+    
+    if($mail=='?' && $password==='?'){
+        $_SESSION['account']=$mail;
+        header('Location:http://localhost/7_Programing/index.html');
+        exit();
+    } else{
+        $error_message = "エラーが発生したためログイン情報を取得できません。";
+        }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -64,6 +56,12 @@ if($data['password'] === $password){
                 <div>
                     <input type = "submit" class = "submit" value = "ログイン">
                 </div>
+                
+                <?php 
+                $token = bin2hex(random_bytes(32));
+                $_SESSION['login_token'] = $token;
+                echo '<input type="hidden" name="login_token" value="'.$token.'" />';
+                ?>
                 
             </form>
             
