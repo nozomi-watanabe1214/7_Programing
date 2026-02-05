@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$error_message = '';
+$error_message = "エラーが発生したためログイン情報を取得できません。";
 
 $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
 
@@ -9,22 +9,27 @@ $user = "root";
 $password = "";
 $data = [];
 
-$dbh = new PDO($dsn, $user, $password);
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+$pdo = new PDO($dsn, $user, $password);
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
     $mail = $_POST['mail'];
     $password = $_POST['password'];
     
-    if($mail=='?' && $password==='?'){
-        $_SESSION['account']=$mail;
+    $stmt = $pdo->prepare("SELECT * FROM account WHERE mail = :mail");
+    $stmt->bindParam(':mail', $mail);
+    $stmt->execute();
+    $user = $stmt->fetch();
+    
+    if ($user && password_verify($password, $user['password'])){
+        $_SESSION['user_id'] = $user['id'];//password_verify()→ハッシュ化されたパスワードと一致するか検証するコード
         header('Location:http://localhost/7_Programing/index.html');
-        exit();
-    } else{
-        $error_message = "エラーが発生したためログイン情報を取得できません。";
-        }
+        exit;
+    } 
+}else{
+        $error_message;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -56,13 +61,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div>
                     <input type = "submit" class = "submit" value = "ログイン">
                 </div>
-                
-                <?php 
-                $token = bin2hex(random_bytes(32));
-                $_SESSION['login_token'] = $token;
-                echo '<input type="hidden" name="login_token" value="'.$token.'" />';
-                ?>
-                
             </form>
             
             <footer></footer>
