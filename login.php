@@ -25,8 +25,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         header('Location:http://localhost/7_Programing/index.html');
         exit;
     } else{
-    echo '<span style = "color:red;">エラーが発生したためログイン情報を取得できません。</span>';
-    $messageColor = 'red';
+    echo '<h2><span style = "color:red;">エラーが発生したためログイン情報を取得できません。</span></h2>';
 }
 }
 ?>
