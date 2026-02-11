@@ -24,10 +24,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $_SESSION['user_id'] = $user['id'];//password_verify()→ハッシュ化されたパスワードと一致するか検証するコード
         header('Location:http://localhost/7_Programing/index.html');
         exit;
-    }
-}else{
-    $error_message = "エラーが発生したためログイン情報を取得できません。". $e->getMessage();;
+    } else{
+    echo '<span style = "color:red;">エラーが発生したためログイン情報を取得できません。</span>';
     $messageColor = 'red';
+}
 }
 ?>
 
