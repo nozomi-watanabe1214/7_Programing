@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$authority = $_SESSION['authority'] ?? 'guest';
 ?>
 
 <!DOCTYPE html>
@@ -21,13 +22,17 @@ session_start();
             <li>D.I.Blogについて</li>
             <li>登録フォーム</li>
             <li>問い合わせ</li>
+            <?php if ($authority === '1'): ?>
             <li>
                 <a href = "regist.php">アカウント登録</a>
                 
             </li>
+            <?php endif; ?>
+            <?php if ($authority === '1'): ?>
             <li>
                 <a href = "list.php">アカウント一覧</a>
             </li>
+            <?php endif; ?>
             <li>その他</li>
         
         </ul>
