@@ -15,14 +15,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $mail = $_POST['mail'];
     $password = $_POST['password'];
     
-    $stmt = $pdo->prepare("SELECT * FROM account WHERE mail = :mail");
+    $stmt = $pdo->prepare("SELECT id,mail,password,authority FROM account WHERE mail = :mail");
     $stmt->bindParam(':mail', $mail);
     $stmt->execute();
     $user = $stmt->fetch();
     
     if ($user && password_verify($password, $user['password'])){
-        $_SESSION['user_id'] = $user['id'];//password_verify()→ハッシュ化されたパスワードと一致するか検証するコード
-        header('Location:http://localhost/7_Programing/index.html');
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['authority'] = $user['authority'];//password_verify()→ハッシュ化されたパスワードと一致するか検証するコード
+        header('Location:http://localhost/7_Programing/index.php');
         exit;
     } else{
     echo '<h2><span style = "color:red;">エラーが発生したためログイン情報を取得できません。</span></h2>';
