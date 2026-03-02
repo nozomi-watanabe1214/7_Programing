@@ -11,12 +11,82 @@ $data = [];
 
 $dbh = new PDO($dsn, $user, $password);
 
-$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
+$dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-$stmt = $dbh -> query($sql); 
+if (isset($_POST["search"])){
+    if (isset($_POST["search_family_name"]) && empty($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+    empty($_POST["search_mail"]) && 
+    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+        $search_familyname = $_POST["search_family_name"];
+        $search_lastname = '';
+        $search_familyname_kana = '';
+        $search_lastname_kana = '';
+        $search_mail = '';
+        $search_gender = $_POST["search_gender"];
+        $search_authority = $_POST["search_authority"];
+    }
+    
+    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+    empty($_POST["search_mail"]) && 
+    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+        $search_familyname = $_POST["search_family_name"];
+        $search_lastname = $_POST["search_last_name"];
+        $search_familyname_kana = '';
+        $search_lastname_kana = '';
+        $search_mail = '';
+        $search_gender = $_POST["search_gender"];
+        $search_authority = $_POST["search_authority"];
+    }
+    
+    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+    empty($_POST["search_mail"]) && 
+    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+        $search_familyname = $_POST["search_family_name"];
+        $search_lastname = $_POST["search_last_name"];
+        $search_familyname_kana = $_POST["search_family_name_kana"];
+        $search_lastname_kana = '';
+        $search_mail = '';
+        $search_gender = $_POST["search_gender"];
+        $search_authority = $_POST["search_authority"];
+    }
+    
+    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
+    empty($_POST["search_mail"]) && 
+    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+        $search_familyname = $_POST["search_family_name"];
+        $search_lastname = $_POST["search_last_name"];
+        $search_familyname_kana = $_POST["search_family_name_kana"];
+        $search_lastname_kana = $_POST["search_last_name_kana"];
+        $search_mail = '';
+        $search_gender = $_POST["search_gender"];
+        $search_authority = $_POST["search_authority"];
+    }
+    
+    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
+    isset($_POST["search_mail"]) && 
+    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+        $search_familyname = $_POST["search_family_name"];
+        $search_lastname = $_POST["search_last_name"];
+        $search_familyname_kana = $_POST["search_family_name_kana"];
+        $search_lastname_kana = $_POST["search_last_name_kana"];
+        $search_mail = $_POST["search_mail"];
+        $search_gender = $_POST["search_gender"];
+        $search_authority = $_POST["search_authority"];
+    }
+    
+    $sql = "SELECT * FROM account WHERE name like '%{$search_name}%' and last_name like '%{$search_last_name}%' and family_name_kana like '%{$search_family_name_kana}%' and last_name_kana like '%{$search_last_name_kana}%' and mail like '%{$search_mail}%' and gender like '%{$search_gender}%' and authority like '%{$search_authority}%'";
+    
+    $rec = $dbh->prepare($sql);
+    $rec->execute();
+    $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
 
-$data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+}else{
+    $sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
+    $stmt = $dbh -> query($sql);
+    $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+}
 
+$dbh=null;
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +101,19 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
         <header></header>
         
     <h1>アカウント一覧画面</h1>
+        <!--検索-->
+<form action="list.php" method="POST">
+    <table border="1" style="border-collapse: collapse"><tr>
+        <th>名前</th>
+        <td><input type="text" name="search_family_name" value="<?php if(!empty($_POST['search_name'])){
+    echo $_POST['search_name']; } ?>"></td>
+        <th>産地</th>
+        <td><input type="text" name="search_fsanchi" value="<?php if( !empty($_POST['search_fsanchi']) ){ echo $_POST['search_fsanchi']; } ?>"></td>
+<td><input type="submit" name="search" value="検索"></td>
+</tr>
+</table>
+</form>
+<br />
         <table>
             <thead>
                 <tr>
