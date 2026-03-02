@@ -11,11 +11,9 @@ $data = [];
 
 $dbh = new PDO($dsn, $user, $password);
 
-$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
+$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
 
-$stmt = $dbh -> prepare($sql); 
-
-$stmt -> execute(); 
+$stmt = $dbh -> query($sql); 
 
 $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
@@ -104,11 +102,16 @@ $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         
                     </td>
                     
-                    <td><form method = "post" action = "update.php"><input type = "submit" class = "submit" value = "更新"></form></td>
+                        <?php
+                        echo "<form action = update.php method = post>";
+                        echo "<input type = hidden name = id value =".$row['id'].">";
+                        echo "<td><input type = submit value = 更新></td>";
+                        echo"</form>";
+                        ?>
                    
                         <?php
                         echo "<form action = delete.php method = post>";
-                    echo "<input type = hidden name = id value =".$row['id'].">";
+                        echo "<input type = hidden name = id value =".$row['id'].">";
                     //echo "<input type = hidden name = last_name value =".$row['last_name'].">";
                     //echo "<input type = hidden name = family_name_kana value =".$row['family_name_kana'].">";
                     //echo "<input type = hidden name = last_name_kana value =".$row['last_name_kana'].">";
