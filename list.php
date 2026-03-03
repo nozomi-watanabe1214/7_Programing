@@ -103,14 +103,77 @@ $dbh=null;
     <h1>アカウント一覧画面</h1>
         <!--検索-->
 <form action="list.php" method="POST">
-    <table border="1" style="border-collapse: collapse"><tr>
-        <th>名前</th>
-        <td><input type="text" name="search_family_name" value="<?php if(!empty($_POST['search_name'])){
-    echo $_POST['search_name']; } ?>"></td>
-        <th>産地</th>
-        <td><input type="text" name="search_fsanchi" value="<?php if( !empty($_POST['search_fsanchi']) ){ echo $_POST['search_fsanchi']; } ?>"></td>
-<td><input type="submit" name="search" value="検索"></td>
-</tr>
+    <table border="1" style="border-collapse: collapse">
+        <tr>
+            <th>名前（性）</th>
+            <td>
+                <input type = "text" name = "search_family_name" 
+                       size = "50" value = "<?php 
+                                          if(!empty($_POST['search_family_name'])){
+                                              echo $_POST['search_family_name']; } ?>">
+            </td>
+        
+        <th>名前（名）</th>
+            <td>
+                <input type = "text" name = "search_last_name" 
+                       size = "50" value = "<?php 
+                                          if(!empty($_POST['search_last_name'])){
+                                              echo $_POST['search_last_name']."\n"; } ?>">
+            </td>
+        </tr>
+        
+        <tr>
+            <th>カナ（性）</th>
+            <td>
+                <input type = "text" name = "search_family_name_kana" 
+                       size = "50" value = "<?php 
+                                          if(!empty($_POST['search_family_name_kana'])){
+                                              echo $_POST['search_family_name_kana']; } ?>">
+            </td>
+            
+            <th>カナ（名）</th>
+            <td>
+                <input type = "text" name = "search_last_name_kana" 
+                       size = "50" value = "<?php 
+                                             if(!empty($_POST['search_last_name_kana'])){
+                                                 echo $_POST['search_last_name_kana']."\n"; } ?>">
+            </td>
+        </tr>
+        
+        <tr>
+            <th>メールアドレス</th>
+            <td>
+                <input type = "text" name = "search_mail" 
+                       size = "50" value = "<?php 
+                                          if(!empty($_POST['search_mail'])){
+                                              echo $_POST['search_mail']; } ?>">
+            </td>
+            
+            <th>性別</th>
+            <td>
+                <input type = "radio" name = "search_gender" value = "0" checked>男
+                <input type = "radio" name = "search_gender" value = "1">女 
+            </td>
+        </tr>  
+        
+        <tr>
+            <th>アカウント権限</th>
+            <td>
+                <select name = "authority">
+                    <option value="0" <?php echo 'selected'; 
+                            ?>>一般
+                    </option>
+                    <option value="1">管理者</option>
+                </select>
+            </td>
+            
+            <th></th>
+            <td></td>
+        </tr>
+        
+        <tr>
+    <input type="submit" name="search" value="検索">
+        </tr>
 </table>
 </form>
 <br />
