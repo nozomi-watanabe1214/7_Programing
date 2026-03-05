@@ -7,23 +7,23 @@ $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
 $user = "root";
 $password = "";
 
-$data = [];
+$rec_list = [];
 
 $dbh = new PDO($dsn, $user, $password);
 
 $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 if (isset($_POST["search"])){
-    if (isset($_POST["search_family_name"]) && empty($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
-    empty($_POST["search_mail"]) && 
-    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_familyname = $_POST["search_family_name"];
-        $search_lastname = '';
-        $search_familyname_kana = '';
-        $search_lastname_kana = '';
+    if (isset($_POST["family_name"]) && empty($_POST["last_name"])&& empty($_POST["family_name_kana"]) && empty($_POST["last_name_kana"]) && 
+    empty($_POST["mail"]) && 
+    isset($_POST["gender"]) && isset($_POST["authority"])){
+        $search_family_name = $_POST["family_name"];
+        $search_last_name = '';
+        $search_family_name_kana = '';
+        $search_last_name_kana = '';
         $search_mail = '';
-        $search_gender = $_POST["search_gender"];
-        $search_authority = $_POST["search_authority"];
+        $search_gender = $_POST["gender"];
+        $search_authority = $_POST["authority"];
     }
     
     if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
@@ -74,10 +74,10 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    $sql = "SELECT * FROM account WHERE name like '%{$search_name}%' and last_name like '%{$search_last_name}%' and family_name_kana like '%{$search_family_name_kana}%' and last_name_kana like '%{$search_last_name_kana}%' and mail like '%{$search_mail}%' and gender like '%{$search_gender}%' and authority like '%{$search_authority}%'";
+    $sql = "SELECT * FROM account WHERE name like '%{$search_family_name}%' and last_name like '%{$search_last_name}%' and family_name_kana like '%{$search_family_name_kana}%' and last_name_kana like '%{$search_last_name_kana}%' and mail like '%{$search_mail}%' and gender like '%{$search_gender}%' and authority like '%{$search_authority}%'";
     
     $rec = $dbh->prepare($sql);
-    $rec->execute();
+    //$rec->execute();
     $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
 
 }else{
@@ -103,7 +103,7 @@ $dbh=null;
     <h1>アカウント一覧画面</h1>
         <!--検索-->
 <form action="list.php" method="POST">
-    <table border="1" style="border-collapse: collapse">
+    <table>
         <tr>
             <th>名前（性）</th>
             <td>
@@ -170,99 +170,89 @@ $dbh=null;
             <th></th>
             <td></td>
         </tr>
-        
-        <tr>
-    <input type="submit" name="search" value="検索">
-        </tr>
-</table>
+    </table>
+    
+    <div>
+        <input type = "submit" name = "search" value = "検索">
+    </div>    
 </form>
 <br />
         <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>名前（性）</th>
-                    <th>名前（名）</th>
-                    <th>カナ（性）</th>
-                    <th>カナ（名）</th>
-                    <th>メールアドレス</th>
-                    <th>性別</th>
-                    <th>アカウント権限</th>
-                    <th>削除フラグ</th>
-                    <th>登録日時</th>
-                    <th>更新日時</th>
-                    <th colspan = "2">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($data as $row):
+            <?php
+                foreach ($rec_list as $rec):
                 ?>
 
                 <tr>
-                    <td><?php echo ($row['id']) ?></td>
-                    <td><?php echo ($row['family_name'])?></td>
-                    <td><?php echo ($row['last_name'])?></td>
-                    <td><?php echo ($row['family_name_kana'])?></td>
-                    <td><?php echo ($row['last_name_kana'])?></td>
-                    <td><?php echo ($row['mail'])?></td>
-                    <td><?php if($row['gender'] == 0){
+                    <th>ID</th>
+                    <td><?php echo ($rec['id']) ?></td>
+                    <th>名前（性）</th>
+                    <td><?php echo ($rec['family_name'])?></td>
+                    <th>名前（名）</th>
+                    <td><?php echo ($rec['last_name'])?></td>
+                    <th>カナ（性）</th>
+                    <td><?php echo ($rec['family_name_kana'])?></td>
+                    <th>カナ（名）</th>
+                    <td><?php echo ($rec['last_name_kana'])?></td>
+                    <th>メールアドレス</th>
+                    <td><?php echo ($rec['mail'])?></td>
+                    <th>性別</th>
+                    <td><?php if($rec['gender'] == 0){
                             echo "男";
-                            } else if($row['gender'] == 1){
+                            } else if($rec['gender'] == 1){
                                 echo "女";
                             } ?>
                     </td>
-                    <td><?php if($row['authority'] == 0){
+                    <th>アカウント権限</th>
+                    <td><?php if($rec['authority'] == 0){
                             echo "一般";
-                            } else if($row['authority'] == 1){
+                            } else if($rec['authority'] == 1){
                                 echo "管理者";
                             } ?>
                     </td>
-                    <td><?php if($row['delete_flag'] == 0){
+                    
+                    <th>削除フラグ</th>
+                    <td><?php if($rec['delete_flag'] == 0){
                             echo "有効";
-                            } else if($row['delete_flag'] == 1){
+                            } else if($rec['delete_flag'] == 1){
                                 echo "無効";
                             } ?>
                     </td>
+                    <th>登録日時</th>
                     <td>
                         <?php
-                        if(empty($row['registered_time'])){
+                        if(empty($rec['registered_time'])){
                             echo "";
                            
                         } 
-                        elseif($date = new DateTime($row['registered_time'])){
+                        elseif($date = new DateTime($rec['registered_time'])){
                             echo $date -> format('Y-m-d');
                             
                                 // 何も表示しない場合はここを空欄にする
                         }
                         ?>
                     </td>
+                    <th>更新日時</th>
                     <td>
                         <?php
-                        if(empty($row['update_time'])){
+                        if(empty($rec['update_time'])){
                             echo "";
                         }
-                        elseif($date = new DateTime($row['update_time'])){
+                        elseif($date = new DateTime($rec['update_time'])){
                             echo $date -> format('Y-m-d');
                         }?>
                         
                     </td>
-                    
-                        <?php
-                        echo "<form action = update.php method = post>";
-                        echo "<input type = hidden name = id value =".$row['id'].">";
-                        echo "<td><input type = submit value = 更新></td>";
-                        echo"</form>";
+                    <th colspan = "2">操作</th>
+                    <?php 
+                    echo "<form action = update.php method = post>";
+                    echo "<input type = hidden name = id value =".$row['id'].">";
+                    echo "<td><input type = submit value = 更新></td>";
+                    echo"</form>";
                         ?>
-                   
-                        <?php
-                        echo "<form action = delete.php method = post>";
-                        echo "<input type = hidden name = id value =".$row['id'].">";
-                    //echo "<input type = hidden name = last_name value =".$row['last_name'].">";
-                    //echo "<input type = hidden name = family_name_kana value =".$row['family_name_kana'].">";
-                    //echo "<input type = hidden name = last_name_kana value =".$row['last_name_kana'].">";
-                    //echo "<input type = hidden name = mail =".$row['mail'].">";
-                    //echo "<input type = hidden name = password value =".$_POST['password'].">";
+                    
+                    <?php 
+                    echo "<form action = delete.php method = post>";
+                    echo "<input type = hidden name = id value =".$row['id'].">";
                     echo "<td><input type = submit value = 削除></td>";
                     
                     echo "</form>";
@@ -270,7 +260,6 @@ $dbh=null;
                     </tr>
                 
                 <?php endforeach; ?>
-            </tbody>
         </table>
            
 <footer></footer>
