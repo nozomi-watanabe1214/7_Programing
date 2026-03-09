@@ -9,9 +9,7 @@ $password = "";
 
 $rec_list = [];
 
-$pdo = new PDO($dsn, $user, $password);
-
-//$dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+$pdo = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION]);
 
 if (isset($_POST["search"])){
     if (isset($_POST["search_family_name"]) && empty($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
@@ -102,7 +100,7 @@ $dbh=null;
         
     <h1>アカウント一覧画面</h1>
         <!--検索-->
-<form action="list.php" method = "POST">
+<form action="" method = "POST">
     <table>
         <tr>
             <th>名前（性）</th>
