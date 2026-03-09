@@ -26,55 +26,55 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["authority"];
     }
     
-    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
     empty($_POST["search_mail"]) && 
     isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_familyname = $_POST["search_family_name"];
-        $search_lastname = $_POST["search_last_name"];
-        $search_familyname_kana = '';
-        $search_lastname_kana = '';
+        $search_family_name = $_POST["search_family_name"];
+        $search_last_name = $_POST["search_last_name"];
+        $search_family_name_kana = '';
+        $search_last_name_kana = '';
         $search_mail = '';
         $search_gender = $_POST["search_gender"];
         $search_authority = $_POST["search_authority"];
     }
     
-    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
     empty($_POST["search_mail"]) && 
     isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_familyname = $_POST["search_family_name"];
-        $search_lastname = $_POST["search_last_name"];
-        $search_familyname_kana = $_POST["search_family_name_kana"];
-        $search_lastname_kana = '';
+        $search_family_name = $_POST["search_family_name"];
+        $search_last_name = $_POST["search_last_name"];
+        $search_family_name_kana = $_POST["search_family_name_kana"];
+        $search_last_name_kana = '';
         $search_mail = '';
         $search_gender = $_POST["search_gender"];
         $search_authority = $_POST["search_authority"];
     }
     
-    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
     empty($_POST["search_mail"]) && 
     isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_familyname = $_POST["search_family_name"];
-        $search_lastname = $_POST["search_last_name"];
-        $search_familyname_kana = $_POST["search_family_name_kana"];
-        $search_lastname_kana = $_POST["search_last_name_kana"];
+        $search_family_name = $_POST["search_family_name"];
+        $search_last_name = $_POST["search_last_name"];
+        $search_family_name_kana = $_POST["search_family_name_kana"];
+        $search_last_name_kana = $_POST["search_last_name_kana"];
         $search_mail = '';
         $search_gender = $_POST["search_gender"];
         $search_authority = $_POST["search_authority"];
     }
     
-    if (isset($_POST["search_familyname"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
     isset($_POST["search_mail"]) && 
     isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_familyname = $_POST["search_family_name"];
-        $search_lastname = $_POST["search_last_name"];
-        $search_familyname_kana = $_POST["search_family_name_kana"];
-        $search_lastname_kana = $_POST["search_last_name_kana"];
+        $search_family_name = $_POST["search_family_name"];
+        $search_last_name = $_POST["search_last_name"];
+        $search_family_name_kana = $_POST["search_family_name_kana"];
+        $search_last_name_kana = $_POST["search_last_name_kana"];
         $search_mail = $_POST["search_mail"];
         $search_gender = $_POST["search_gender"];
         $search_authority = $_POST["search_authority"];
     }
     
-    $sql = "SELECT * FROM account WHERE name like '%{$search_family_name}%' and last_name like '%{$search_last_name}%' and family_name_kana like '%{$search_family_name_kana}%' and last_name_kana like '%{$search_last_name_kana}%' and mail like '%{$search_mail}%' and gender like '%{$search_gender}%' and authority like '%{$search_authority}%'";
+    $sql = "SELECT * FROM account WHERE family_name like '%{$search_family_name}%' and last_name like '%{$search_last_name}%' and family_name_kana like '%{$search_family_name_kana}%' and last_name_kana like '%{$search_last_name_kana}%' and mail like '%{$search_mail}%' and gender like '%{$search_gender}%' and authority like '%{$search_authority}%'";
     
     $rec = $dbh->prepare($sql);
     //$rec->execute();
