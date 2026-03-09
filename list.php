@@ -9,21 +9,21 @@ $password = "";
 
 $rec_list = [];
 
-$dbh = new PDO($dsn, $user, $password);
+$pdo = new PDO($dsn, $user, $password);
 
-$dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+//$dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 if (isset($_POST["search"])){
-    if (isset($_POST["family_name"]) && empty($_POST["last_name"])&& empty($_POST["family_name_kana"]) && empty($_POST["last_name_kana"]) && 
-    empty($_POST["mail"]) && 
-    isset($_POST["gender"]) && isset($_POST["authority"])){
-        $search_family_name = $_POST["family_name"];
+    if (isset($_POST["search_family_name"]) && empty($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+    empty($_POST["search_mail"]) && 
+    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+        $search_family_name = $_POST["search_family_name"];
         $search_last_name = '';
         $search_family_name_kana = '';
         $search_last_name_kana = '';
         $search_mail = '';
-        $search_gender = $_POST["gender"];
-        $search_authority = $_POST["authority"];
+        $search_gender = $_POST["search_gender"];
+        $search_authority = $_POST["search_authority"];
     }
     
     if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
@@ -74,16 +74,16 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    $sql = "SELECT * FROM account WHERE family_name like '%{$search_family_name}%' and last_name like '%{$search_last_name}%' and family_name_kana like '%{$search_family_name_kana}%' and last_name_kana like '%{$search_last_name_kana}%' and mail like '%{$search_mail}%' and gender like '%{$search_gender}%' and authority like '%{$search_authority}%'";
+    $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender like '%".$_POST["search_gender"]."%' ";
     
-    $rec = $dbh->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     //$rec->execute();
-    $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
+    $rec_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 }else{
     $sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
-    $stmt = $dbh -> query($sql);
-    $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo -> query($sql);
+    $rec_list = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 }
 
 $dbh=null;
@@ -102,23 +102,21 @@ $dbh=null;
         
     <h1>アカウント一覧画面</h1>
         <!--検索-->
-<form action="list.php" method="POST">
+<form action="list.php" method = "POST">
     <table>
         <tr>
             <th>名前（性）</th>
             <td>
                 <input type = "text" name = "search_family_name" 
                        size = "50" value = "<?php 
-                                          if(!empty($_POST['search_family_name'])){
-                                              echo $_POST['search_family_name']; } ?>">
+                                              echo $_POST['search_family_name']?>"> 
             </td>
         
         <th>名前（名）</th>
             <td>
                 <input type = "text" name = "search_last_name" 
                        size = "50" value = "<?php 
-                                          if(!empty($_POST['search_last_name'])){
-                                              echo $_POST['search_last_name']."\n"; } ?>">
+                                                  echo $_POST['search_last_name']?>">
             </td>
         </tr>
         
@@ -127,16 +125,14 @@ $dbh=null;
             <td>
                 <input type = "text" name = "search_family_name_kana" 
                        size = "50" value = "<?php 
-                                          if(!empty($_POST['search_family_name_kana'])){
-                                              echo $_POST['search_family_name_kana']; } ?>">
+                                                  echo $_POST['search_family_name_kana']?>">
             </td>
             
             <th>カナ（名）</th>
             <td>
                 <input type = "text" name = "search_last_name_kana" 
                        size = "50" value = "<?php 
-                                             if(!empty($_POST['search_last_name_kana'])){
-                                                 echo $_POST['search_last_name_kana']."\n"; } ?>">
+                                                  echo $_POST['search_last_name_kana']?>">
             </td>
         </tr>
         
@@ -145,8 +141,7 @@ $dbh=null;
             <td>
                 <input type = "text" name = "search_mail" 
                        size = "50" value = "<?php 
-                                          if(!empty($_POST['search_mail'])){
-                                              echo $_POST['search_mail']; } ?>">
+                                                  echo $_POST['search_mail']?>">
             </td>
             
             <th>性別</th>
@@ -179,53 +174,53 @@ $dbh=null;
 <br />
         <table>
             <?php
-                foreach ($rec_list as $rec):
+                foreach ($rec_list as $row):
                 ?>
 
                 <tr>
                     <th>ID</th>
-                    <td><?php echo ($rec['id']) ?></td>
+                    <td><?php echo ($row['id']) ?></td>
                     <th>名前（性）</th>
-                    <td><?php echo ($rec['family_name'])?></td>
+                    <td><?php echo ($row['family_name'])?></td>
                     <th>名前（名）</th>
-                    <td><?php echo ($rec['last_name'])?></td>
+                    <td><?php echo ($row['last_name'])?></td>
                     <th>カナ（性）</th>
-                    <td><?php echo ($rec['family_name_kana'])?></td>
+                    <td><?php echo ($row['family_name_kana'])?></td>
                     <th>カナ（名）</th>
-                    <td><?php echo ($rec['last_name_kana'])?></td>
+                    <td><?php echo ($row['last_name_kana'])?></td>
                     <th>メールアドレス</th>
-                    <td><?php echo ($rec['mail'])?></td>
+                    <td><?php echo ($row['mail'])?></td>
                     <th>性別</th>
-                    <td><?php if($rec['gender'] == 0){
+                    <td><?php if($row['gender'] == 0){
                             echo "男";
-                            } else if($rec['gender'] == 1){
+                            } else if($row['gender'] == 1){
                                 echo "女";
                             } ?>
                     </td>
                     <th>アカウント権限</th>
-                    <td><?php if($rec['authority'] == 0){
+                    <td><?php if($row['authority'] == 0){
                             echo "一般";
-                            } else if($rec['authority'] == 1){
+                            } else if($row['authority'] == 1){
                                 echo "管理者";
                             } ?>
                     </td>
                     
                     <th>削除フラグ</th>
-                    <td><?php if($rec['delete_flag'] == 0){
+                    <td><?php if($row['delete_flag'] == 0){
                             echo "有効";
-                            } else if($rec['delete_flag'] == 1){
+                            } else if($row['delete_flag'] == 1){
                                 echo "無効";
                             } ?>
                     </td>
                     <th>登録日時</th>
                     <td>
                         <?php
-                        if(empty($rec['registered_time'])){
+                        if(empty($row['registered_time'])){
                             echo "";
                            
                         } 
-                        elseif($date = new DateTime($rec['registered_time'])){
-                            echo $date -> format('Y-m-d');
+                        elseif($rec_list = new DateTime($row['registered_time'])){
+                            echo $rec_list -> format('Y-m-d');
                             
                                 // 何も表示しない場合はここを空欄にする
                         }
@@ -234,11 +229,11 @@ $dbh=null;
                     <th>更新日時</th>
                     <td>
                         <?php
-                        if(empty($rec['update_time'])){
+                        if(empty($row['update_time'])){
                             echo "";
                         }
-                        elseif($date = new DateTime($rec['update_time'])){
-                            echo $date -> format('Y-m-d');
+                        elseif($rec_list = new DateTime($row['update_time'])){
+                            echo $rec_list -> format('Y-m-d');
                         }?>
                         
                     </td>
