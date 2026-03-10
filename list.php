@@ -72,7 +72,7 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender like '%".$_POST["search_gender"]."%' ";
+    $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender = '".$_POST["search_gender"]."' and authority = '".$_POST["search_authority"]."' ";
     
     $rec = $dbh->prepare($sql);
     $rec->execute();
@@ -259,7 +259,6 @@ $dbh=null;
                             } ?>
                         
                     </td>
-                    <th colspan = "2">操作</th>
                     <?php 
                     echo "<form action = update.php method = post>";
                     echo "<input type = hidden name = id value =".$rec['id'].">";
