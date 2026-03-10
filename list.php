@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 mb_internal_encoding("UTF8");
 
 $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
@@ -12,9 +14,10 @@ $rec_list = [];
 $dbh = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION]);
 
 if (isset($_POST["search"])){
-    if (isset($_POST["search_family_name"]) && empty($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
-    empty($_POST["search_mail"]) && 
-    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+    if (isset($_POST["search_family_name"]) && empty($_POST["search_last_name"])&& 
+        empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+        empty($_POST["search_mail"]) && 
+        isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
         $search_family_name = $_POST["search_family_name"];
         $search_last_name = '';
         $search_family_name_kana = '';
@@ -24,9 +27,9 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
-    empty($_POST["search_mail"]) && 
-    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
+        empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+        empty($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
         $search_family_name = $_POST["search_family_name"];
         $search_last_name = $_POST["search_last_name"];
         $search_family_name_kana = '';
@@ -36,9 +39,9 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
-    empty($_POST["search_mail"]) && 
-    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
+        isset($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
+        empty($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
         $search_family_name = $_POST["search_family_name"];
         $search_last_name = $_POST["search_last_name"];
         $search_family_name_kana = $_POST["search_family_name_kana"];
@@ -48,9 +51,9 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
-    empty($_POST["search_mail"]) && 
-    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
+        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
+        empty($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
         $search_family_name = $_POST["search_family_name"];
         $search_last_name = $_POST["search_last_name"];
         $search_family_name_kana = $_POST["search_family_name_kana"];
@@ -60,9 +63,9 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
-    isset($_POST["search_mail"]) && 
-    isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
+        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
+        isset($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
         $search_family_name = $_POST["search_family_name"];
         $search_last_name = $_POST["search_last_name"];
         $search_family_name_kana = $_POST["search_family_name_kana"];
@@ -77,14 +80,13 @@ if (isset($_POST["search"])){
     $rec = $dbh->prepare($sql);
     $rec->execute();
     $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-}else{
-    $sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
-    $rec = $dbh -> query($sql);
-    $rec_list = $rec -> fetchAll(PDO::FETCH_ASSOC);
-}
+//else{
+    //$sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
+    //$rec = $dbh -> query($sql);
+    //$rec_list = $rec -> fetchAll(PDO::FETCH_ASSOC);
 
-$dbh=null;
 ?>
 
 <!DOCTYPE html>
@@ -176,8 +178,6 @@ $dbh=null;
 </form>
 <br />
         <table>
-            
-            <thead>
             <tr>
                     <th>ID</th>
                     <th>名前（性）</th>
@@ -192,7 +192,6 @@ $dbh=null;
                     <th>更新日時</th>
                     <th colspan = "2">操作</th>
                 </tr>
-            </thead>
             <?php
                 foreach ($rec_list as $rec):
                 ?>
