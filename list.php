@@ -14,66 +14,6 @@ $rec_list = [];
 $dbh = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION]);
 
 if (isset($_POST["search"])){
-    if (isset($_POST["search_family_name"]) && empty($_POST["search_last_name"])&& 
-        empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
-        empty($_POST["search_mail"]) && 
-        isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_family_name = $_POST["search_family_name"];
-        $search_last_name = '';
-        $search_family_name_kana = '';
-        $search_last_name_kana = '';
-        $search_mail = '';
-        $search_gender = $_POST["search_gender"];
-        $search_authority = $_POST["search_authority"];
-    }
-    
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
-        empty($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
-        empty($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_family_name = $_POST["search_family_name"];
-        $search_last_name = $_POST["search_last_name"];
-        $search_family_name_kana = '';
-        $search_last_name_kana = '';
-        $search_mail = '';
-        $search_gender = $_POST["search_gender"];
-        $search_authority = $_POST["search_authority"];
-    }
-    
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
-        isset($_POST["search_family_name_kana"]) && empty($_POST["search_last_name_kana"]) && 
-        empty($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_family_name = $_POST["search_family_name"];
-        $search_last_name = $_POST["search_last_name"];
-        $search_family_name_kana = $_POST["search_family_name_kana"];
-        $search_last_name_kana = '';
-        $search_mail = '';
-        $search_gender = $_POST["search_gender"];
-        $search_authority = $_POST["search_authority"];
-    }
-    
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
-        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
-        empty($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_family_name = $_POST["search_family_name"];
-        $search_last_name = $_POST["search_last_name"];
-        $search_family_name_kana = $_POST["search_family_name_kana"];
-        $search_last_name_kana = $_POST["search_last_name_kana"];
-        $search_mail = '';
-        $search_gender = $_POST["search_gender"];
-        $search_authority = $_POST["search_authority"];
-    }
-    
-    if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
-        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
-        isset($_POST["search_mail"]) && isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-        $search_family_name = $_POST["search_family_name"];
-        $search_last_name = $_POST["search_last_name"];
-        $search_family_name_kana = $_POST["search_family_name_kana"];
-        $search_last_name_kana = $_POST["search_last_name_kana"];
-        $search_mail = $_POST["search_mail"];
-        $search_gender = $_POST["search_gender"];
-        $search_authority = $_POST["search_authority"];
-    }
     
     $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender = '".$_POST["search_gender"]."' and authority = '".$_POST["search_authority"]."' ";
     
@@ -170,14 +110,22 @@ if (isset($_POST["search"])){
             <th></th>
             <td></td>
         </tr>
+        
+        <tr>
+            <th></th>
+            <td></td>
+            <th></th>
+            <td>
+                <input type = "submit" name = "search" value="検索">
+            </td>
+        </tr>
     </table>
-    
-    <div>
-        <input type = "submit" name = "search" value = "検索">
-    </div>    
 </form>
 <br />
+
+        <?php if ($search !== ""): ?>
         <table>
+            <thead>
             <tr>
                     <th>ID</th>
                     <th>名前（性）</th>
@@ -192,6 +140,10 @@ if (isset($_POST["search"])){
                     <th>更新日時</th>
                     <th colspan = "2">操作</th>
                 </tr>
+            </thead>
+            
+            <tbody>
+            
             <?php
                 foreach ($rec_list as $rec):
                 ?>
@@ -275,6 +227,9 @@ if (isset($_POST["search"])){
                     </tr>
                 
                 <?php endforeach; ?>
+                </tbody>
         </table>
-           
+        <?php endif; ?>
+        
+
 <footer></footer>
