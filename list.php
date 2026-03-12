@@ -13,6 +13,8 @@ $rec_list = [];
 
 $dbh = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION]);
 
+$search = isset($_POST['search']) ? trim($_POST['search']) : '';
+
 if (isset($_POST["search"])){
     
     $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender = '".$_POST["search_gender"]."' and authority = '".$_POST["search_authority"]."' ";
@@ -227,7 +229,7 @@ if (isset($_POST["search"])){
                     </tr>
                 
                 <?php endforeach; ?>
-                </tbody>
+                
         </table>
         <?php endif; ?>
         
