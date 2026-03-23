@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(0);
+//error_reporting(0);
 
 mb_internal_encoding("UTF8");
 
@@ -23,7 +23,7 @@ if (isset($_POST["search"])){
         $search_family_name = $_POST["search_family_name"];
         $search_last_name = '';
         $search_family_name_kana = '';
-         $search_gender = $_POST["search_gender"];
+        $search_gender = $_POST["search_gender"];
         $search_authority = $_POST["search_authority"];
     }
     
@@ -69,7 +69,7 @@ if (isset($_POST["search"])){
         $search_authority = $_POST["search_authority"];
     }
     
-    $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender = '%".$_POST["search_gender"]."%' and authority = '".$_POST["search_authority"]."' ";
+    $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender like '%".$_POST["search_gender"]."%' and authority like '".$_POST["search_authority"]."' ";
     
     $rec = $dbh->prepare($sql);
     $rec->execute();
@@ -156,7 +156,7 @@ $dbh=null;
         <tr>
             <th>アカウント権限</th>
             <td>
-                <select name = "authority">
+                <select name = "search_authority">
                     <option value="0" <?php echo 'selected'; 
                             ?>>一般
                     </option>
