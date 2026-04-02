@@ -11,23 +11,23 @@ $password = "";
 
 $rec_list = [];
 
-$dbh = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION]);
+$dbh = new PDO($dsn, $user, $password, 
+            [PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION]);
 
 $search = isset($_POST['search']) ? trim ($_POST['search']) : '';
 
-if ($search === ''){
-     $sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
-    
+if (isset($search)){
+    $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender like '".$_POST["search_gender"]."' and authority like '".$_POST["search_authority"]."' ORDER BY ID DESC";
+     
     $rec = $dbh->prepare($sql);
-    $rec->execute();
 
 } else{
-    $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender like '".$_POST["search_gender"]."' and authority like '".$_POST["search_authority"]."' ORDER BY ID DESC";
-    
+    $sql = 'SELECT FROM account ORDER BY id DESC';
     $rec = $dbh->prepare($sql);
-    $rec->execute();
+    
 }
 
+$rec->execute();
 $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
 $dbh=null;
 
@@ -175,7 +175,8 @@ $dbh=null;
                                 echo "男";
                             } else if($rec['gender'] == 1){
                                 echo "女";
-                            } ?>
+                            } 
+                        ?>
                     </td>
                     
                     <td>
