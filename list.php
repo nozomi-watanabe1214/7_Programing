@@ -1,6 +1,7 @@
 <?php
 
 //error_reporting(0);
+session_start();
 
 mb_internal_encoding("UTF8");
 
@@ -27,15 +28,34 @@ if (isset($_POST["search"])){
          $search_gender = $_POST["search_gender"];
          $search_authority = $_POST["search_authority"];
          
-//         $conditions = array();
-//         if (isset($_POST["search_family_name"]) && $_POST["search_family_name"]!='') {
-//             $conditions[] = "family_name like '%".$_POST["search_family_name"]."%'";
-//         }
-//         if (isset($_POST["search_last_name"]) && $_POST["search_last_name"]!='') {
-//             $conditions[] = "last_name like '%".$_POST["search_last_name"]."%'";
-//         }
-//         var_dump(implode(" and ", $conditions));
-//         exit;
+         $conditions = array();
+         //条件配列初期化のため、空の配列指定。
+
+         if (isset($_POST["search_family_name"]) && $_POST["search_family_name"]!='') {
+         //$_POST[]がある かつ 空でないとき
+             $conditions[] = "family_name like '%".$_POST["search_family_name"]."%'";
+         }
+         if (isset($_POST["search_last_name"]) && $_POST["search_last_name"]!='') {
+             $conditions[] = "last_name like '%".$_POST["search_last_name"]."%'";
+         }
+         if (isset($_POST["search_family_name_kana"]) && $_POST["search_family_name_kana"]!='') {
+             $conditions[] = "family_name_kana '%".$_POST["search_family_name_kana"]."%'";
+         }
+         if (isset($_POST["search_last_name_kana"]) && $_POST["search_last_name_kana"]!='') {
+             $conditions[] = "last_name_kana like '%".$_POST["search_last_name_kana"]."%'";
+         }
+         if (isset($_POST["search_mail"]) && $_POST["search_mail"]!='') {
+             $conditions[] = "mail like '%".$_POST["search_mail"]."%'";
+         }
+         if (isset($_POST["search_gender"]) && $_POST["search_gender"]!='') {
+             $conditions[] = "gender like '%".$_POST["search_gender"]."%'";
+         }
+         if (isset($_POST["search_authority"]) && $_POST["search_authority"]!='') {
+             $conditions[] = "authority like '%".$_POST["search_authority"]."%'";
+         }
+         var_dump(implode(" and ", $conditions));
+         //デバッグして検索値を抽出
+         exit;
 
          $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender like '".$_POST["search_gender"]."' and authority like '".$_POST["search_authority"]."' ORDER BY ID DESC";
      }
@@ -44,7 +64,7 @@ if (isset($_POST["search"])){
     $rec->execute();
 
 } else{
-    $sql = 'SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flag, registered_time, update_time FROM account ORDER BY id DESC';
+    $sql = 'SELECT * FROM account ORDER BY id DESC';
     
     $rec = $dbh->prepare($sql);
     $rec->execute();
