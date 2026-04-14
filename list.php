@@ -17,14 +17,15 @@ $dbh = new PDO($dsn, $user, $password,
 
 $search = isset($_POST['search']) ? trim ($_POST['search']) : "";
 
-if (isset($_POST["search"])){
-     if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
-        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
-        isset($_POST["search_mail"]) && 
-        isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
-         $search_family_name = $_POST["search_family_name"];
-         $search_last_name = '';
-         $search_family_name_kana = '';
+if ($search){
+//     if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
+//        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
+//        isset($_POST["search_mail"]) && 
+//        isset($_POST["search_gender"]) && isset($_POST["search_authority"])){
+//         $search_family_name = $_POST["search_family_name"];
+//         $search_last_name = $_POST["search_last_name"];
+//         $search_family_name_kana = $_POST["search_family_name_kana"];
+//         $search_mail = $_POST["search_mail"];
          $search_gender = $_POST["search_gender"];
          $search_authority = $_POST["search_authority"];
          
@@ -48,17 +49,16 @@ if (isset($_POST["search"])){
              $conditions[] = "mail like '%".$_POST["search_mail"]."%'";
          }
          if (isset($_POST["search_gender"]) && $_POST["search_gender"]!='') {
-             $conditions[] = "gender like '%".$_POST["search_gender"]."%'";
+             $conditions[] = "gender = $search_gender";
          }
          if (isset($_POST["search_authority"]) && $_POST["search_authority"]!='') {
-             $conditions[] = "authority like '%".$_POST["search_authority"]."%'";
+             $conditions[] = "authority = $search_authority";
          }
          var_dump(implode(" and ", $conditions));
          //デバッグして検索値を抽出
          exit;
 
-         $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender like '".$_POST["search_gender"]."' and authority like '".$_POST["search_authority"]."' ORDER BY ID DESC";
-     }
+         $sql = "SELECT * FROM account WHERE family_name like '%".$_POST["search_family_name"]."%' and last_name like '%".$_POST["search_last_name"]."%' and family_name_kana like '%".$_POST["search_family_name_kana"]."%' and last_name_kana like '%".$_POST["search_last_name_kana"]."%' and mail like '%".$_POST["search_mail"]."%' and gender='$search_gender' and authority ='$search_authority' ORDER BY ID DESC";
     
     $rec = $dbh->prepare($sql);
     $rec->execute();
