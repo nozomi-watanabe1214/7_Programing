@@ -19,13 +19,8 @@ $search = isset($_POST['search']) ? trim ($_POST['search']) : "";
 
 
 
-if (isset($search) && $search !== '') { 
-    // 空ではない（0も含む）
-    $family_name = '%'.$_POST['search_family_name'].'%';
-    $last_name = '%'.$_POST['search_last_name'].'%';
-    $family_name_kana = '%'.$_POST['search_family_name_kana'].'%';
-    $last_name_kana = '%'.$_POST['search_last_name_kana'].'%';
-    $mail = '%'.$_POST['search_mail'].'%';
+if ($search === "") { 
+    
 
 //     if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
 //        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
@@ -36,49 +31,55 @@ if (isset($search) && $search !== '') {
 //         $search_family_name_kana = $_POST["search_family_name_kana"];
 //         $search_mail = $_POST["search_mail"];
           
-    $search_gender = $_POST["search_gender"];
-    $search_authority = $_POST["search_authority"];
-    
-    $conditions = array();
-         //条件配列初期化のため、空の配列指定。
 
-         if (isset($_POST["search_family_name"]) && $_POST["search_family_name"]!='') {
-         //$_POST[]がある かつ 空でないとき
-             $conditions[] = "family_name like '%".$_POST["search_family_name"]."%'";
-         }
-         if (isset($_POST["search_last_name"]) && $_POST["search_last_name"]!='') {
-             $conditions[] = "last_name like '%".$_POST["search_last_name"]."%'";
-         }
-         if (isset($_POST["search_family_name_kana"]) && $_POST["search_family_name_kana"]!='') {
-             $conditions[] = "family_name_kana '%".$_POST["search_family_name_kana"]."%'";
-         }
-         if (isset($_POST["search_last_name_kana"]) && $_POST["search_last_name_kana"]!='') {
-             $conditions[] = "last_name_kana like '%".$_POST["search_last_name_kana"]."%'";
-         }
-         if (isset($_POST["search_mail"]) && $_POST["search_mail"]!='') {
-             $conditions[] = "mail like '%".$_POST["search_mail"]."%'";
-         }
-         if (isset($_POST["search_gender"]) && $_POST["search_gender"]!='') {
-             $conditions[] = "gender = $search_gender";
-         }
-         if (isset($_POST["search_authority"]) && $_POST["search_authority"]!='') {
-             $conditions[] = "authority = $search_authority";
-         }
-         var_dump(implode(" and ", $conditions));
-         //デバッグして検索値を抽出
-         exit;
+//    $conditions = array();
+//         //条件配列初期化のため、空の配列指定。
+//
+//         if (isset($_POST["search_family_name"]) && $_POST["search_family_name"]!='') {
+//         //$_POST[]がある かつ 空でないとき
+//             $conditions[] = "family_name like '%".$_POST["search_family_name"]."%'";
+//         }
+//         if (isset($_POST["search_last_name"]) && $_POST["search_last_name"]!='') {
+//             $conditions[] = "last_name like '%".$_POST["search_last_name"]."%'";
+//         }
+//         if (isset($_POST["search_family_name_kana"]) && $_POST["search_family_name_kana"]!='') {
+//             $conditions[] = "family_name_kana '%".$_POST["search_family_name_kana"]."%'";
+//         }
+//         if (isset($_POST["search_last_name_kana"]) && $_POST["search_last_name_kana"]!='') {
+//             $conditions[] = "last_name_kana like '%".$_POST["search_last_name_kana"]."%'";
+//         }
+//         if (isset($_POST["search_mail"]) && $_POST["search_mail"]!='') {
+//             $conditions[] = "mail like '%".$_POST["search_mail"]."%'";
+//         }
+//         if (isset($_POST["search_gender"]) && $_POST["search_gender"]!='') {
+//             $conditions[] = "gender = $search_gender";
+//         }
+//         if (isset($_POST["search_authority"]) && $_POST["search_authority"]!='') {
+//             $conditions[] = "authority = $search_authority";
+//         }
+//         var_dump(implode(" and ", $conditions));
+//         //デバッグして検索値を抽出
+//         exit;
     
-    $sql = "SELECT * FROM account WHERE family_name LIKE ? AND last_name LIKE ? AND family_name_kana LIKE ? AND 
-    last_name_kana LIKE ? AND mail LIKE ? AND gender = ? AND authority = ? ORDER BY id DESC";      
-    
-    $rec = $dbh->prepare($sql);
-    $rec->execute([$family_name, $last_name, $family_name_kana, $last_name_kana, $mail, $search_gender, $search_authority]);
-
-} else{
     $sql = "SELECT * FROM account ORDER BY ID DESC";
     
     $rec = $dbh->prepare($sql);
     $rec->execute();
+
+} else if (isset($search)) {
+    $family_name = '%'.$_POST['search_family_name'].'%';
+    $last_name = '%'.$_POST['search_last_name'].'%';
+    $family_name_kana = '%'.$_POST['search_family_name_kana'].'%';
+    $last_name_kana = '%'.$_POST['search_last_name_kana'].'%';
+    $mail = '%'.$_POST['search_mail'].'%';
+    $search_gender = $_POST["search_gender"];
+    $search_authority = $_POST["search_authority"];
+    
+    $sql = "SELECT * FROM account WHERE family_name LIKE ? AND last_name LIKE ? AND family_name_kana LIKE ? AND 
+    last_name_kana LIKE ? AND mail LIKE ? AND gender = ? AND authority = ? ORDER BY id DESC";      
+       
+    $rec = $dbh->prepare($sql);
+    $rec->execute([$family_name, $last_name, $family_name_kana, $last_name_kana, $mail, $search_gender, $search_authority]);
 }
 
 $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
