@@ -33,7 +33,6 @@ if ($search === "") {
           
 
 //    $conditions = array();
-//         //条件配列初期化のため、空の配列指定。
 //
 //         if (isset($_POST["search_family_name"]) && $_POST["search_family_name"]!='') {
 //         //$_POST[]がある かつ 空でないとき
@@ -58,7 +57,7 @@ if ($search === "") {
 //             $conditions[] = "authority = $search_authority";
 //         }
 //         var_dump(implode(" and ", $conditions));
-//         //デバッグして検索値を抽出
+//         
 //         exit;
     
     $sql = "SELECT * FROM account ORDER BY ID DESC";
@@ -66,7 +65,7 @@ if ($search === "") {
     $rec = $dbh->prepare($sql);
     $rec->execute();
 
-} else if (isset($search)) {
+} elseif (isset($search)) {
     $family_name = '%'.$_POST['search_family_name'].'%';
     $last_name = '%'.$_POST['search_last_name'].'%';
     $family_name_kana = '%'.$_POST['search_family_name_kana'].'%';
@@ -179,7 +178,8 @@ $dbh=null;
 </form>
 <br />
 
-         <?php if ($search !== ""): ?>
+         <?php
+        if ($search !== ''): ?>
         <table>
             <thead>
             <tr>
@@ -230,6 +230,7 @@ $dbh=null;
                             } else if($rec['gender'] == 1){
                                 echo "女";
                             } ?>
+                         <?php if (isset($_POST['example']) && $_POST['example'] == "1") echo 'checked'; ?>
                     </td>
                     
                     <td>
