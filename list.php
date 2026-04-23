@@ -65,20 +65,20 @@ if ($search === "") {
     $rec = $dbh->prepare($sql);
     $rec->execute();
 
-} elseif (isset($search)) {
-    $family_name = '%'.$_POST['search_family_name'].'%';
-    $last_name = '%'.$_POST['search_last_name'].'%';
-    $family_name_kana = '%'.$_POST['search_family_name_kana'].'%';
-    $last_name_kana = '%'.$_POST['search_last_name_kana'].'%';
-    $mail = '%'.$_POST['search_mail'].'%';
-    $search_gender = $_POST["search_gender"];
-    $search_authority = $_POST["search_authority"];
+} elseif (isset($_POST['search_family_name'])) {　//もしfamily_nameがセット(選択)されたら、
+//    $family_name = '%'.$_POST['search_family_name'].'%';
+//    $last_name = '%'.$_POST['search_last_name'].'%';
+//    $family_name_kana = '%'.$_POST['search_family_name_kana'].'%';
+//    $last_name_kana = '%'.$_POST['search_last_name_kana'].'%';
+//    $mail = '%'.$_POST['search_mail'].'%';
+//    $search_gender = $_POST["search_gender"];
+//    $search_authority = $_POST["search_authority"];
     
-    $sql = "SELECT * FROM account WHERE family_name LIKE ? AND last_name LIKE ? AND family_name_kana LIKE ? AND 
-    last_name_kana LIKE ? AND mail LIKE ? AND gender = ? AND authority = ? ORDER BY id DESC";      
+    $sql = "SELECT * FROM account WHERE family_name LIKE '%".$_POST['search_family_name']."%' ORDER BY id DESC";
+    //テーブルaccountからカラム「family_name」に$family_nameを含むものをSELECTする。
        
     $rec = $dbh->prepare($sql);
-    $rec->execute([$family_name, $last_name, $family_name_kana, $last_name_kana, $mail, $search_gender, $search_authority]);
+    $rec->execute();
 }
 
 $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
