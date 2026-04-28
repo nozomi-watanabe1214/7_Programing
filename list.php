@@ -65,7 +65,8 @@ if ($search === "") {
     $rec = $dbh->prepare($sql);
     $rec->execute();
 
-} elseif (isset($_POST['search_family_name'])) {　//もしfamily_nameがセット(選択)されたら、
+} elseif (isset($_POST['search_family_name'])) {　//もしfamily_nameがセット(入力)されたら、
+    
 //    $family_name = '%'.$_POST['search_family_name'].'%';
 //    $last_name = '%'.$_POST['search_last_name'].'%';
 //    $family_name_kana = '%'.$_POST['search_family_name_kana'].'%';
@@ -74,7 +75,7 @@ if ($search === "") {
 //    $search_gender = $_POST["search_gender"];
 //    $search_authority = $_POST["search_authority"];
     
-    $sql = "SELECT * FROM account WHERE family_name LIKE '%".$_POST['search_family_name']."%' ORDER BY id DESC";
+    $sql = "SELECT * FROM account WHERE family_name LIKE '%".$_POST['search_family_name']."%' ORDER BY ID DESC";
     //テーブルaccountからカラム「family_name」に$family_nameを含むものをSELECTする。
        
     $rec = $dbh->prepare($sql);
