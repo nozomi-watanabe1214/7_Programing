@@ -17,8 +17,6 @@ $dbh = new PDO($dsn, $user, $password,
 
 $search = isset($_POST['search']) ? trim ($_POST['search']) : "";
 
-
-
 if ($search === "") { 
     
 
@@ -65,7 +63,7 @@ if ($search === "") {
     $rec = $dbh->prepare($sql);
     $rec->execute();
 
-} elseif (isset($_POST['search_family_name'])) {　//もしfamily_nameがセット(入力)されたら、
+} elseif (isset($_POST['search_family_name'])) {//もしfamily_nameがセット(入力)されたら、
     
     $family_name = '%'.$_POST['search_family_name'].'%';
 //    $last_name = '%'.$_POST['search_last_name'].'%';
@@ -79,10 +77,20 @@ if ($search === "") {
     //テーブルaccountからカラム「family_name」に$family_nameを含むものをSELECTする。
        
     $rec = $dbh->prepare($sql);
-    $rec->execute($family_name);
+    $rec->execute();
 }
 
-$rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT * FROM account ";
+if (isset($_POST['search_family_name']) && $_POST['search_family_name'] != '') {
+    $sql .= "WHERE family_name LIKE '%".$_POST['search_family_name']."%' ";
+}
+if (isset($_POST['search_last_name']) && $_POST['search_last_name'] != '') {
+    $sql .= "WHERE last_name LIKE '%".$_POST['search_last_name']."%' ";
+}
+$sql .= " ORDER BY ID DESC";
+var_dump($sql);
+
+if (isset($rec)) $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
 $dbh=null;
 
 ?>
