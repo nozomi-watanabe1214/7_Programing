@@ -10,6 +10,9 @@ $dsn = "mysql:dbname=registration;host=localhost;charset=utf8";
 $user = "root";
 $password = "";
 
+//$columns = [$_POST['search_family_name'],$_POST['search_last_name'],$_POST['search_family_name_kana'],$_POST['search_last_name_kana'],
+//            $_POST['search_mail'],$_POST["search_gender"],$_POST['search_authority']]
+$sql = "SELECT * FROM account WHERE 1=1";
 $rec_list = [];
 
 $dbh = new PDO($dsn, $user, $password, 
@@ -17,9 +20,15 @@ $dbh = new PDO($dsn, $user, $password,
 
 $search = isset($_POST['search']) ? trim ($_POST['search']) : "";
 
+//foreach ($columns as $col) {
+//    if (isset($_POST[$col]) && $_POST[$col] !== '') {
+//        $sql .= "AND $col LIKE :$col";
+//        $rec_list[":$col"] = '%'.$_POST[$col].'%';
+//    }
+//}
+$sql .= " ORDER BY ID DESC";
+   
 if ($search === "") { 
-    
-
 //     if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
 //        isset($_POST["search_family_name_kana"]) && isset($_POST["search_last_name_kana"]) && 
 //        isset($_POST["search_mail"]) && 
@@ -30,7 +39,7 @@ if ($search === "") {
 //         $search_mail = $_POST["search_mail"];
           
 
-//    $conditions = array();
+//    $conditions = array();//この配列$conditionsをANDでつなげる？？
 //
 //         if (isset($_POST["search_family_name"]) && $_POST["search_family_name"]!='') {
 //         //$_POST[]がある かつ 空でないとき
@@ -58,20 +67,20 @@ if ($search === "") {
 //         
 //         exit;
     
-    $sql = "SELECT * FROM account ORDER BY ID DESC";
-    
-    $rec = $dbh->prepare($sql);
-    $rec->execute();
-
+//    $sql = "SELECT * FROM account ORDER BY ID DESC";
+//    
+//    $rec = $dbh->prepare($sql);
+//    $rec->execute();
+//
 } elseif (isset($_POST['search_family_name'])) {//もしfamily_nameがセット(入力)されたら、
     
     $family_name = '%'.$_POST['search_family_name'].'%';
-//    $last_name = '%'.$_POST['search_last_name'].'%';
+    $last_name = '%'.$_POST['search_last_name'].'%';
 //    $family_name_kana = '%'.$_POST['search_family_name_kana'].'%';
 //    $last_name_kana = '%'.$_POST['search_last_name_kana'].'%';
 //    $mail = '%'.$_POST['search_mail'].'%';
-//    $search_gender = $_POST["search_gender"];
-//    $search_authority = $_POST["search_authority"];
+//    $search_gender = $_POST['search_gender'];
+//    $search_authority = $_POST['search_authority'];
     
     $sql = "SELECT * FROM account WHERE family_name LIKE '%$family_name%' ORDER BY ID DESC";
     //テーブルaccountからカラム「family_name」に$family_nameを含むものをSELECTする。
@@ -80,7 +89,7 @@ if ($search === "") {
     $rec->execute();
 }
 
-$sql = "SELECT * FROM account ";
+$sql = "SELECT * FROM account";
 if (isset($_POST['search_family_name']) && $_POST['search_family_name'] != '') {
     $sql .= "WHERE family_name LIKE '%".$_POST['search_family_name']."%' ";
 }
