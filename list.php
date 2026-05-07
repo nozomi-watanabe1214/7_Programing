@@ -12,7 +12,7 @@ $password = "";
 
 //$columns = [$_POST['search_family_name'],$_POST['search_last_name'],$_POST['search_family_name_kana'],$_POST['search_last_name_kana'],
 //            $_POST['search_mail'],$_POST["search_gender"],$_POST['search_authority']]
-$sql = "SELECT * FROM account WHERE 1=1";
+
 $rec_list = [];
 
 $dbh = new PDO($dsn, $user, $password, 
@@ -26,7 +26,6 @@ $search = isset($_POST['search']) ? trim ($_POST['search']) : "";
 //        $rec_list[":$col"] = '%'.$_POST[$col].'%';
 //    }
 //}
-$sql .= " ORDER BY ID DESC";
    
 if ($search === "") { 
 //     if (isset($_POST["search_family_name"]) && isset($_POST["search_last_name"])&& 
@@ -67,10 +66,10 @@ if ($search === "") {
 //         
 //         exit;
     
-//    $sql = "SELECT * FROM account ORDER BY ID DESC";
+    $sql = "SELECT * FROM account ORDER BY ID DESC";
 //    
-//    $rec = $dbh->prepare($sql);
-//    $rec->execute();
+    $rec = $dbh->prepare($sql);
+    $rec->execute();
 //
 } elseif (isset($_POST['search_family_name'])) {//もしfamily_nameがセット(入力)されたら、
     
@@ -82,7 +81,7 @@ if ($search === "") {
 //    $search_gender = $_POST['search_gender'];
 //    $search_authority = $_POST['search_authority'];
     
-    $sql = "SELECT * FROM account WHERE family_name LIKE '%$family_name%' ORDER BY ID DESC";
+    $sql = "SELECT * FROM account WHERE family_name LIKE '%$family_name%' AND last_name LIKE '%$last_name%' ORDER BY ID DESC";
     //テーブルaccountからカラム「family_name」に$family_nameを含むものをSELECTする。
        
     $rec = $dbh->prepare($sql);
@@ -96,7 +95,7 @@ if (isset($_POST['search_family_name']) && $_POST['search_family_name'] != '') {
 if (isset($_POST['search_last_name']) && $_POST['search_last_name'] != '') {
     $sql .= "WHERE last_name LIKE '%".$_POST['search_last_name']."%' ";
 }
-$sql .= " ORDER BY ID DESC";
+$sql .= "ORDER BY ID DESC";
 var_dump($sql);
 
 if (isset($rec)) $rec_list = $rec->fetchAll(PDO::FETCH_ASSOC);
