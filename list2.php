@@ -19,20 +19,22 @@ $rec_list = [];
 
 
 
-$sql = "SELECT * FROM account WHERE 1=1";
+$sql = "SELECT * FROM account WHERE 1=1 ";
 
 $columns = [
     'search_family_name' => 'family_name',
-    'search_last_name' => 'last_name'
+    'search_last_name' => 'last_name',
+    'search_family_name_kana' => 'family_name_kana'
 ];
 
 foreach ($columns as $post => $column) {
     if (!empty($_POST[$post])) {
-        $sql .= "AND {$column} LIKE '%".$_POST[$post]."%'";
+        $sql .= "AND $column LIKE '%".$_POST[$post]."%' ";
+
     }
 }//$post=search_family_name,$column=family_nameのようにセットの配列を複数繰り返し$colmuns[]とする
 
-//$sql .= "ORDER BY id DESC";
+$sql .= "ORDER BY id DESC";
 
 $column = $dbh->prepare($sql);
 $column->execute();
