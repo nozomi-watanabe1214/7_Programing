@@ -24,13 +24,17 @@ $sql = "SELECT * FROM account WHERE 1=1 ";
 $columns = [
     'search_family_name' => 'family_name',
     'search_last_name' => 'last_name',
-    'search_family_name_kana' => 'family_name_kana'
+    'search_family_name_kana' => 'family_name_kana',
+    'search_last_name_kana' => 'last_name_kana',
+    'search_mail' => 'mail',
+    'search_gender' => 'gender',
+    'search_authority' => 'authority'
 ];
 
-foreach ($columns as $post => $column) {
-    if (!empty($_POST[$post])) {
-        $sql .= "AND $column LIKE '%".$_POST[$post]."%' ";
-
+foreach ($columns as $search => $column) {
+    if (isset($_POST[$search]) && $_POST[$search] != '')  {
+        $sql .= "AND $column LIKE '%".$_POST[$search]."%' ";
+//echo $sql;
     }
 }//$post=search_family_name,$column=family_nameのようにセットの配列を複数繰り返し$colmuns[]とする
 
@@ -136,8 +140,7 @@ $dbh=null;
 </form>
 <br />
 
-         <?php
-        if ($post !== ''): ?>
+         <?php if (isset($_POST['search'])): ?>
         <table>
             <thead>
             <tr>
