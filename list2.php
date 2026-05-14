@@ -30,13 +30,14 @@ $columns = [
     'search_gender' => 'gender',
     'search_authority' => 'authority'
 ];
+//各テキストボックスのnameとカラム名をそろえておけばこのコードも割愛できる！
 
 foreach ($columns as $search => $column) {
     if (isset($_POST[$search]) && $_POST[$search] != '')  {
         $sql .= "AND $column LIKE '%".$_POST[$search]."%' ";
 //echo $sql;
     }
-}//$post=search_family_name,$column=family_nameのようにセットの配列を複数繰り返し$colmuns[]とする
+}//$serch=search_family_name,$column=family_nameのようにセットの配列を複数繰り返し$colmuns[]とする
 
 $sql .= "ORDER BY id DESC";
 
